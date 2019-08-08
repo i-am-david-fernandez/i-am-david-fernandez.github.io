@@ -3,6 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/project/</loc>
+    <lastmod>2019-08-08T11:28:35+10:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/project/this_website/</loc>
+    <lastmod>2019-08-08T11:28:35+10:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-08-08T11:28:35+10:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-08-08T09:34:03+10:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/style_demo/</loc>
+    <lastmod>2019-08-08T09:34:03+10:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/post_number_one/</loc>
+    <lastmod>2019-08-07T13:54:53+10:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/authors/admin/</loc>
   </url>
   
@@ -14,10 +46,6 @@
   <url>
     <loc>/categories/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
   </url>
   
   <url>
@@ -35,11 +63,6 @@
   
   <url>
     <loc>/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
     <priority>0</priority>
   </url>
   

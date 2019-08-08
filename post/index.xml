@@ -5,12 +5,71 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 08 Aug 2019 09:34:03 +1000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Style Demo</title>
+      <link>/post/style_demo/</link>
+      <pubDate>Thu, 08 Aug 2019 09:34:03 +1000</pubDate>
+      <guid>/post/style_demo/</guid>
+      <description>
+
+&lt;p&gt;This post simply serves to provide a demonstration of the styles and shortcodes I have added/customised for this site.&lt;/p&gt;
+
+&lt;h4 id=&#34;inline-quote&#34;&gt;Inline Quote&lt;/h4&gt;
+
+&lt;p&gt;An inline quote can be created via an &lt;code&gt;iquote&lt;/code&gt; shortcode pair:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-[markdown]&#34;&gt;{{&amp;lt; iquote &amp;gt;}}A journey of a thousand miles begins with a single step{{&amp;lt; /iquote &amp;gt;}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Will be rendered as: &lt;span class=&#34;iquote&#34;&gt;A journey of a thousand miles begins with a single step&lt;/span&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;footnotes&#34;&gt;Footnotes&lt;/h4&gt;
+
+&lt;p&gt;Footnotes (the material at the bottom, not the in-body reference) have been tweaked to use a small font size. See the bottom of this post.&lt;/p&gt;
+
+&lt;p&gt;Some plain text with a footnote&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; inline. An inline quote: &lt;span class=&#34;iquote&#34;&gt;A journey of a thousand miles begins with a single step&lt;/span&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, also with a footnote inline. This second example also (subtly) demonstrates the small, non-breaking space that the &lt;code&gt;iquote&lt;/code&gt; shortcode inserts immediately after the closing quotation mark, primarily to avoid the problem of the quotation mark and footnote reference being so close together as to be unclear.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Nothing to see here, move along.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/A_journey_of_a_thousand_miles_begins_with_a_single_step&#34; target=&#34;_blank&#34;&gt;A journey of a thousand miles begins with a single step - Wikipedia&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Post Number One</title>
+      <link>/post/post_number_one/</link>
+      <pubDate>Wed, 07 Aug 2019 13:54:53 +1000</pubDate>
+      <guid>/post/post_number_one/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m not sure which attempt this is. Only the second, I think. The last one was quite some time ago though. It chugged along ok for a while, but tapered off and dropped into oblivion. Hopefully this one sticks.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m also not sure what I shall be posting here. A mix of things probably. I&amp;rsquo;d like to document some of my hobby projects, share some non-technical things (like parks and playgrounds I&amp;rsquo;ve discovered and enjoyed) and also describe some more serious professional points (like what services I can offer and how I can help &lt;em&gt;you&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Without wishing to get too philosophical, it is said that &lt;span class=&#34;iquote&#34;&gt;A journey of a thousand miles begins with a single step&lt;/span&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. This is that first step.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/A_journey_of_a_thousand_miles_begins_with_a_single_step&#34; target=&#34;_blank&#34;&gt;A journey of a thousand miles begins with a single step - Wikipedia&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
   </channel>
 </rss>
