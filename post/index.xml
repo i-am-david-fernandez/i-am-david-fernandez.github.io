@@ -5,12 +5,163 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 07 Aug 2019 13:54:53 +1000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 11 Aug 2019 12:23:49 +1000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Information Security: My Philosophy</title>
+      <link>/post/infosec/information-security-00/</link>
+      <pubDate>Sun, 11 Aug 2019 12:23:49 +1000</pubDate>
+      <guid>/post/infosec/information-security-00/</guid>
+      <description>
+
+&lt;p&gt;Information Security is something that interests me. I would argue that it should be of interest to &lt;em&gt;anyone&lt;/em&gt; and &lt;strong&gt;&lt;em&gt;everyone&lt;/em&gt;&lt;/strong&gt; involved in managing or handling data, especially that of other people&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, which pretty much means almost everyone working in software development or information technology more generally. It should also include anyone making choices about what software or systems they use to manage data, even if that&amp;rsquo;s not part of their job description.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;#takeaway&#34;&gt;TLDR;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;definitions&#34;&gt;Definitions&lt;/h1&gt;
+
+&lt;p&gt;As a first point, I should clarify what I mean by information security, as varying definitions exist. I tend to follow the definition provided in ISO/IEC 27000&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;definition 3.28: preservation of &lt;em&gt;confidentiality&lt;/em&gt;, &lt;em&gt;integrity&lt;/em&gt; and &lt;em&gt;availability&lt;/em&gt; of information&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As noted in the footnote to that definition, other properties, such as authenticity and reliability, can also be involved, though, for the moment at least, I will maintain focus on the three above.&lt;/p&gt;
+
+&lt;p&gt;These properties will be relevant to all users of data, though the requirements can vary widely and this must be understood.&lt;/p&gt;
+
+&lt;h2 id=&#34;integrity&#34;&gt;Integrity&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;definition 3.36: property of accuracy and completeness&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Broadly speaking I consider data integrity to simply mean that the data is what you expect it to be, which generally means that, for a given piece of data, what you read tomorrow is what you&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; wrote today.&lt;/p&gt;
+
+&lt;p&gt;Almost all users will have about the same integrity requirements: they want the data they retrieve to be the data they saved. They do not want the data to be changed in unexpected ways, whether as a result of malicious action (e.g., &amp;ldquo;hacking&amp;rdquo;), user error (e.g., accidental deletion), or system failure (e.g., a hardware crash).&lt;/p&gt;
+
+&lt;p&gt;That said, there may be some instances where this isn&amp;rsquo;t strictly true. An example may be an image storage system whereby uploaded images are (re-)compressed in a lossy manner (e.g., JPEG compression) in order to reduce size (and hence, perhaps, allow the user to store more images).&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; In this case, what the user later retrieves (the compressed image) is not exactly bit-for-bit the same as that which they sent for storage.&lt;/p&gt;
+
+&lt;h2 id=&#34;availability&#34;&gt;Availability&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;definition 3.7: property of being accessible and usable on demand by an authorized entity&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In simple terms, I consider this to mean that everyone that should have access to the data is able to get it in a timely manner.&lt;/p&gt;
+
+&lt;p&gt;Availability requirements will differ: some users will want/need data immediately&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, some don&amp;rsquo;t mind to wait. All want to get it eventually though.&lt;/p&gt;
+
+&lt;h2 id=&#34;confidentiality&#34;&gt;Confidentiality&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;definition 3.10: property that information is not made available or disclosed to unauthorized individuals, entities, or
+processes&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I consider this to mean that access to data &amp;ndash; including, in some cases, mere knowledge of the &lt;em&gt;existence&lt;/em&gt; of the data &amp;ndash; can be restricted and controlled.&lt;/p&gt;
+
+&lt;p&gt;Confidentiality requirements will differ: some don&amp;rsquo;t care who has access&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;, some &lt;em&gt;want&lt;/em&gt; all to access (e.g., someone in marketing may want as many people as possible to view their pitch), some want strict controls (few people want anyone but themselves and perhaps their bank to see their bank records).&lt;/p&gt;
+
+&lt;h2 id=&#34;authenticity&#34;&gt;Authenticity&lt;/h2&gt;
+
+&lt;p&gt;One of the &amp;ldquo;other properties&amp;rdquo; mentioned in the opening information security definition that I&amp;rsquo;d like to expand on is authenticity.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;definition 3.6: property that an entity is what it claims to be&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I like to think of this in terms of trust or provenance, that is, being able to trust, verify or confirm the stated source of data.&lt;/p&gt;
+
+&lt;p&gt;As with all the other properties, requirements will vary. In some instances, as long as access-control mechanisms are in place (i.e., only authorised users have access), it may not matter which &lt;em&gt;specific&lt;/em&gt; authorised user has modified data. In other cases (such as a hospital patient&amp;rsquo;s medication requirements), knowing exactly which user made the changes &amp;ndash; and possibly knowing the entire change history &amp;ndash; is of critical importance.&lt;/p&gt;
+
+&lt;h1 id=&#34;lax-approach-hahahugoshortcode-s0-hbhb&#34;&gt;Lax Approach &lt;span class=&#34;subtle&#34;&gt;(not the airport)&lt;/span&gt;&lt;/h1&gt;
+
+&lt;p&gt;Too often, it seems, information security is an afterthought. It isn&amp;rsquo;t often part of a user&amp;rsquo;s core requirements (they want to use the data to do things that are important to them), though this is changing as more people become aware of what can happen when information is &lt;em&gt;not&lt;/em&gt; secured. As a result of this lack of user pressure, the need to keep information secure can fall by the wayside (market pressures can mean it is sometimes difficult to justify spending resources investigating/developing features that the user won&amp;rsquo;t explicitly demand).&lt;/p&gt;
+
+&lt;p&gt;In many instances, I believe that information security is seen as non-critical because of the parallels drawn with physical security, e.g., physical locks and keys on doors. By and large, physical security mechanisms exist to protect physical resources from theft, damage or other such malicious acts. To prioritise security of this form essentially requires belief that a) one has resources worth protecting, and b) there exist malicious others that would try to gain access to those resources. In the world of information, I suggest that most people can evaluate the first point well enough&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;, but perhaps don&amp;rsquo;t do so well with the second&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the physical world, generally, the cost of attempting to gain access to restricted resources (e.g., research time, time to break open a lock and door, the risk and consequence of being caught and so-on) is relatively high, so it makes sense that attackers would tend to choose targets relatively carefully such that the potential gains outweigh the potential costs. In the information world, however, the cost of attempting access can be exceptionally low, approaching zero when considering the scale of attack provided by mechanisms like botnets&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34;&gt;9&lt;/a&gt;&lt;/sup&gt; and when the global, cross-border nature of things means law enforcement is often powerless. In addition, as mechanisms such as ransomware&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34;&gt;10&lt;/a&gt;&lt;/sup&gt; have demonstrated, modes of attack that aren&amp;rsquo;t often seen in the physical world can become very attractive to attackers in the information world.&lt;/p&gt;
+
+&lt;p&gt;The consequence is that resources that would not be targets for attackers in the physical world &lt;em&gt;are&lt;/em&gt; targets in the information world. As a result, I think that questions that might be relevant in physical security, such as &amp;ldquo;why would anyone want to steal my stuff?&amp;rdquo; or &amp;ldquo;who would go after me?&amp;rdquo; are not so useful when considering information security, as the broad answers that present real threats can simply be &amp;ldquo;because they can&amp;rdquo; and &amp;ldquo;anyone looking to make a quick buck&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;In short, to those without experience or interest in the area, the risks associated with poor information security are not generally as well understood or appreciated as those for physical security.&lt;/p&gt;
+
+&lt;h1 id=&#34;more-than-just-stopping-the-bad-guys&#34;&gt;More Than Just Stopping The Bad Guys&lt;/h1&gt;
+
+&lt;p&gt;In the section above I focussed on the notion of protecting information from those seeking to do harm of some sort (theft, extortion, etc.), but information security is about more that just that. There are many ways, beyond malice, in which the security of information can be compromised, and these should be considered even, and perhaps especially, in cases where protection against attack is not considered important (e.g., within an isolated/offline system).&lt;/p&gt;
+
+&lt;p&gt;One source of compromise is plain old user error, or PICNIC&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:11&#34;&gt;&lt;a href=&#34;#fn:11&#34;&gt;11&lt;/a&gt;&lt;/sup&gt; as it&amp;rsquo;s sometimes known. I&amp;rsquo;d hazard a guess that almost everyone (if not everyone) who has ever used a computer has at some stage accidentally deleted a file. Or worse&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:12&#34;&gt;&lt;a href=&#34;#fn:12&#34;&gt;12&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;A second set of sources are system faults. This broad category covers many things including hardware failures, software crashes, natural disasters (e.g., floods that damage/destroy hardware) and unexpected user responses&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:13&#34;&gt;&lt;a href=&#34;#fn:13&#34;&gt;13&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;In both cases there&amp;rsquo;s no ill intent, but that matters little if your critical data is gone.&lt;/p&gt;
+
+&lt;p&gt;For risks such as these, one really needs to be thinking beyond the threats with parallels in traditional (physical) security. It really isn&amp;rsquo;t just about &amp;ldquo;who are the bad guys and how could they get me?&amp;rdquo;, it&amp;rsquo;s about &amp;ldquo;how is my data at risk?&amp;rdquo;.&lt;/p&gt;
+
+&lt;h1 id=&#34;philosophy&#34;&gt;Philosophy&lt;/h1&gt;
+
+&lt;p&gt;With these definitions and ideas in mind, I present my philosophy:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Information Security should be considered a foundational aspect of the specification and design of systems managing data.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This isn&amp;rsquo;t revolutionary or outside the square, and I don&amp;rsquo;t expect my view is unique, but I don&amp;rsquo;t think it&amp;rsquo;s the norm yet either.&lt;/p&gt;
+
+&lt;p&gt;Also, I don&amp;rsquo;t mean that every system should have two-factor authentication, signed certificates, redundant storage, 256-bit encrypted channels or any other particular security feature. Rather, when specifying or designing such a system, the properties defined and described above should be explicitly considered and appropriate questions asked. &amp;ldquo;How is the information secured?&amp;rdquo; should be as important a question as &amp;ldquo;How much will this cost?&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Addressing information security concerns is fundamentally an exercise in risk management and so, if helpful, the language and tools of risk management can be used to aid in the determination of how information will be secured. This can be especially helpful for those that don&amp;rsquo;t have a background in information security (or information technology more generally) but are familiar with risk management (such as many in management roles).&lt;/p&gt;
+
+&lt;h1 id=&#34;takeaway&#34;&gt;Takeaway&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;ve taken a somewhat engineering- and slightly business-oriented approach to things here, but I firmly believe that these ideas are applicable to non-professionals too. I suggest that a person&amp;rsquo;s family photos are as valuable to them as financial records are to a business, and quite possibly more valuable.&lt;/p&gt;
+
+&lt;p&gt;To that end, I leave you with this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Any information that is of value to you is worth keeping secure.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;My general view with this sort of thing is roughly this: if you mess up your own stuff, &lt;em&gt;you&lt;/em&gt; have to deal with the consequences. If you mess up someone else&amp;rsquo;s stuff, &lt;em&gt;they&lt;/em&gt; have to deal with the consequences, which I think is worse (i.e., having to clean up someone else&amp;rsquo;s mess).
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;&lt;a href=&#34;https://www.iso.org/standard/73906.html&#34; target=&#34;_blank&#34;&gt;ISO/IEC 27000:2018 - Information technology &amp;ndash; Security techniques &amp;ndash; Information security management systems &amp;ndash; Overview and vocabulary&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;Or some other authorised user/process/agent.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;Google Photos allows users to make such a choice. See &lt;a href=&#34;https://support.google.com/photos/answer/6220791?co=GENIE.Platform%3DDesktop&amp;amp;hl=en&#34; target=&#34;_blank&#34;&gt;Choose the upload size of your photos and videos - Google Photos Help&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34;&gt;Even &amp;ldquo;immediately&amp;rdquo; can vary: for high-frequency traders, &amp;ldquo;immediately&amp;rdquo; can mean within microseconds of making a request, while for most people, waiting a few seconds to retrieve an email message is perfectly fine.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:5&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34;&gt;Though even this can vary, for example, between who can &lt;em&gt;read&lt;/em&gt; the data and who can &lt;em&gt;modify&lt;/em&gt; it.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:6&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34;&gt;Though I&amp;rsquo;d also suggest that too many people undervalue personal information that can be misused with regards to identity theft.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:7&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:8&#34;&gt;It&amp;rsquo;s not too uncommon to hear variations on &amp;ldquo;why would anyone want to go after me?&amp;rdquo;.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:8&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:9&#34;&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Botnet&#34; target=&#34;_blank&#34;&gt;Botnet - Wikipedia&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:9&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:10&#34;&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Ransomware&#34; target=&#34;_blank&#34;&gt;Ransomware - Wikipedia&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:10&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:11&#34;&gt;&lt;a href=&#34;https://en.wiktionary.org/wiki/PEBCAK&#34; target=&#34;_blank&#34;&gt;PEBCAK - Wiktionary&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:11&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:12&#34;&gt;For example, these &lt;a href=&#34;https://blog.envisionitsolutions.com/six-horror-stories-of-data-loss&#34; target=&#34;_blank&#34;&gt;Six Horror Stories of Data Loss&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:12&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:13&#34;&gt;Such as Unintentional &lt;a href=&#34;https://en.wikipedia.org/wiki/Denial-of-service_attack#Unintentional_denial-of-service&#34; target=&#34;_blank&#34;&gt;Denial-of-service attack - Wikipedia&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:13&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Post Number One</title>
