@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>homelab | i.am.david.fernandez</title>
+    <link>/tags/homelab/</link>
+      <atom:link href="/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
+    <description>homelab</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 14 Aug 2019 15:23:15 +1000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>homelab</title>
+      <link>/tags/homelab/</link>
+    </image>
+    
+    <item>
+      <title>Homelab</title>
+      <link>/project/homelab/</link>
+      <pubDate>Wed, 14 Aug 2019 15:23:15 +1000</pubDate>
+      <guid>/project/homelab/</guid>
+      <description>&lt;p&gt;This project serves to capture material relating to my home (computer) lab setup. I intend to use this to document and share what I have done and learned and what I hope to do in future.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -88,6 +88,20 @@
 
   
   
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-145696525-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
   
 
   
@@ -121,6 +135,32 @@
   
 
   
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#677a04",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "#677a04"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "https://cookies.insites.com"
+      }
+    })});
+</script>
+
 
 
   
@@ -389,6 +429,8 @@
   
   <h2>Latest</h2>
   <ul>
+    
+      <li><a href="/project/homelab/">Homelab</a></li>
     
       <li><a href="/post/infosec/information-security-00/">Information Security: My Philosophy</a></li>
     

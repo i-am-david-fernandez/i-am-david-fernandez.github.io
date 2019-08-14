@@ -3,6 +3,35 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/project/homelab/</loc>
+    <lastmod>2019-08-14T15:23:15+10:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/</loc>
+    <lastmod>2019-08-14T15:23:15+10:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-08-14T15:23:15+10:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/homelab/</loc>
+    <lastmod>2019-08-14T15:23:15+10:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-08-14T15:23:15+10:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/post/infosec/information-security-00/</loc>
     <lastmod>2019-08-13T15:15:58+10:00</lastmod>
   </url>
@@ -13,26 +42,8 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-08-13T15:15:58+10:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2019-08-13T15:15:58+10:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/infosec/</loc>
     <lastmod>2019-08-13T15:15:58+10:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/project/</loc>
-    <lastmod>2019-08-08T11:28:35+10:00</lastmod>
     <priority>0</priority>
   </url>
   
