@@ -5,12 +5,44 @@
     <link>/publication/</link>
       <atom:link href="/publication/index.xml" rel="self" type="application/rss+xml" />
     <description>Publications</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 12 Dec 2007 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Publications</title>
       <link>/publication/</link>
     </image>
+    
+    <item>
+      <title>Local Path Planning along Bush Tracks using Vision</title>
+      <link>/publication/local-path-planning-along-bush-tracks-using-vision/</link>
+      <pubDate>Wed, 12 Dec 2007 00:00:00 +0000</pubDate>
+      <guid>/publication/local-path-planning-along-bush-tracks-using-vision/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visual navigation on rough tracks in bush environments</title>
+      <link>/publication/visual-navigation-on-rough-tracks-in-bush-environments/</link>
+      <pubDate>Tue, 01 May 2007 00:00:00 +0000</pubDate>
+      <guid>/publication/visual-navigation-on-rough-tracks-in-bush-environments/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visual detection and tracking of poorly structured dirt roads</title>
+      <link>/publication/visual-detection-and-tracking-of-poorly-structured-dirt-roads/</link>
+      <pubDate>Wed, 20 Jul 2005 00:00:00 +0000</pubDate>
+      <guid>/publication/visual-detection-and-tracking-of-poorly-structured-dirt-roads/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visual odometry for an outdoor mobile robot</title>
+      <link>/publication/visual-odometry-for-an-outdoor-mobile-robot/</link>
+      <pubDate>Fri, 03 Dec 2004 00:00:00 +0000</pubDate>
+      <guid>/publication/visual-odometry-for-an-outdoor-mobile-robot/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>1 | i.am.david.fernandez</title>
+    <link>/publication_types/1/</link>
+      <atom:link href="/publication_types/1/index.xml" rel="self" type="application/rss+xml" />
+    <description>1</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 12 Dec 2007 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>1</title>
+      <link>/publication_types/1/</link>
+    </image>
+    
+    <item>
+      <title>Local Path Planning along Bush Tracks using Vision</title>
+      <link>/publication/local-path-planning-along-bush-tracks-using-vision/</link>
+      <pubDate>Wed, 12 Dec 2007 00:00:00 +0000</pubDate>
+      <guid>/publication/local-path-planning-along-bush-tracks-using-vision/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visual detection and tracking of poorly structured dirt roads</title>
+      <link>/publication/visual-detection-and-tracking-of-poorly-structured-dirt-roads/</link>
+      <pubDate>Wed, 20 Jul 2005 00:00:00 +0000</pubDate>
+      <guid>/publication/visual-detection-and-tracking-of-poorly-structured-dirt-roads/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visual odometry for an outdoor mobile robot</title>
+      <link>/publication/visual-odometry-for-an-outdoor-mobile-robot/</link>
+      <pubDate>Fri, 03 Dec 2004 00:00:00 +0000</pubDate>
+      <guid>/publication/visual-odometry-for-an-outdoor-mobile-robot/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

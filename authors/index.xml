@@ -5,12 +5,36 @@
     <link>/authors/</link>
       <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 12 Dec 2007 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Authors</title>
       <link>/authors/</link>
     </image>
+    
+    <item>
+      <title>D. Fernandez</title>
+      <link>/authors/d.-fernandez/</link>
+      <pubDate>Wed, 12 Dec 2007 00:00:00 +0000</pubDate>
+      <guid>/authors/d.-fernandez/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R. A. Jarvis</title>
+      <link>/authors/r.-a.-jarvis/</link>
+      <pubDate>Wed, 12 Dec 2007 00:00:00 +0000</pubDate>
+      <guid>/authors/r.-a.-jarvis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A. Price</title>
+      <link>/authors/a.-price/</link>
+      <pubDate>Wed, 20 Jul 2005 00:00:00 +0000</pubDate>
+      <guid>/authors/a.-price/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title></title>
