@@ -7,7 +7,7 @@
     <description>this website</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 08 Aug 2019 11:28:35 +1000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>img/map[gravatar:%!s(bool=true) shape:square]</url>
       <title>this website</title>
       <link>/tags/this-website/</link>
     </image>
@@ -27,19 +27,18 @@
       <pubDate>Wed, 07 Aug 2019 13:54:53 +1000</pubDate>
       <guid>/post/this_website/post_number_one/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m not sure which attempt this is. Only the second, I think. The last one was quite some time ago though. It chugged along ok for a while, but tapered off and dropped into oblivion. Hopefully this one sticks.&lt;/p&gt;
-
 &lt;p&gt;I&amp;rsquo;m also not sure what I shall be posting here. A mix of things probably. I&amp;rsquo;d like to document some of my hobby projects, share some non-technical things (like parks and playgrounds I&amp;rsquo;ve discovered and enjoyed) and also describe some more serious professional points (like what services I can offer and how I can help &lt;em&gt;you&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;Without wishing to get too philosophical, it is said that &lt;span class=&#34;iquote&#34;&gt;A journey of a thousand miles begins with a single step&lt;/span&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. This is that first step.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
+&lt;p&gt;Without wishing to get too philosophical, it is said that &lt;span class=&#34;iquote&#34;&gt;A journey of a thousand miles begins with a single step&lt;/span&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. This is that first step.&lt;/p&gt;
+&lt;!-- FOOTNOTES --&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/A_journey_of_a_thousand_miles_begins_with_a_single_step&#34; target=&#34;_blank&#34;&gt;A journey of a thousand miles begins with a single step - Wikipedia&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://en.wikipedia.org/wiki/A_journey_of_a_thousand_miles_begins_with_a_single_step&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A journey of a thousand miles begins with a single step - Wikipedia&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;
+&lt;/section&gt;
 </description>
     </item>
     

@@ -1,6 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-03-08T18:00:00+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/privacy/</loc>
+    <lastmod>2020-03-08T18:00:00+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-03-03T14:19:29+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/synchronising_a_virtual_machine_across_devices/</loc>
+    <lastmod>2020-03-03T14:19:29+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-03-03T14:19:29+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/virtualisation/</loc>
+    <lastmod>2020-03-03T14:19:29+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/homelab/</loc>
+    <lastmod>2019-08-18T08:36:03+10:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/homelab/virtualisation_and_provisioning/</loc>
+    <lastmod>2019-08-18T08:36:03+10:00</lastmod>
+  </url>
   
   <url>
     <loc>/project/homelab/</loc>
@@ -10,25 +50,6 @@
   <url>
     <loc>/project/</loc>
     <lastmod>2019-08-14T15:23:15+10:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-08-14T15:23:15+10:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/homelab/</loc>
-    <lastmod>2019-08-14T15:23:15+10:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2019-08-14T15:23:15+10:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -37,14 +58,8 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2019-08-13T15:15:58+10:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/infosec/</loc>
     <lastmod>2019-08-13T15:15:58+10:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -55,7 +70,6 @@
   <url>
     <loc>/tags/this-website/</loc>
     <lastmod>2019-08-08T11:28:35+10:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -66,19 +80,16 @@
   <url>
     <loc>/publication_types/1/</loc>
     <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/authors/</loc>
     <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/authors/d.-fernandez/</loc>
     <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -89,7 +100,6 @@
   <url>
     <loc>/publication_types/</loc>
     <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -100,13 +110,11 @@
   <url>
     <loc>/authors/r.-a.-jarvis/</loc>
     <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/publication_types/7/</loc>
     <lastmod>2007-05-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -117,7 +125,6 @@
   <url>
     <loc>/authors/a.-price/</loc>
     <lastmod>2005-07-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -136,7 +143,6 @@
   
   <url>
     <loc>/categories/</loc>
-    <priority>0</priority>
   </url>
   
   <url>

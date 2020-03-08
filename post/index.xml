@@ -5,161 +5,348 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 11 Aug 2019 12:23:49 +1000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 03 Mar 2020 14:19:29 +1100</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>img/map[gravatar:%!s(bool=true) shape:square]</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Synchronising a Virtual Machine Across Devices</title>
+      <link>/post/synchronising_a_virtual_machine_across_devices/</link>
+      <pubDate>Tue, 03 Mar 2020 14:19:29 +1100</pubDate>
+      <guid>/post/synchronising_a_virtual_machine_across_devices/</guid>
+      <description>&lt;p&gt;I have a need to use a single virtual machine on two devices, in particular a laptop and a desktop machine. My requirements/constraints for use are as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Both devices run Windows 10, so the solution must work in this environment.&lt;/li&gt;
+&lt;li&gt;I do &lt;em&gt;not&lt;/em&gt; need to work on both devices simultaneously.&lt;/li&gt;
+&lt;li&gt;I will generally only use one device on any given day (i.e., will switch devices at most once per day).&lt;/li&gt;
+&lt;li&gt;I do not wish for complications or performance hits &lt;em&gt;within&lt;/em&gt; work sessions.&lt;/li&gt;
+&lt;li&gt;I don&amp;rsquo;t mind some up-front complications.&lt;/li&gt;
+&lt;li&gt;I don&amp;rsquo;t mind some performance hits (e.g., extra time) &lt;em&gt;between&lt;/em&gt; work sessions.&lt;/li&gt;
+&lt;li&gt;I almost exclusively use 
+&lt;a href=&#34;https://www.vagrantup.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant by HashiCorp&lt;/a&gt; to manage my virtual machines, and 
+&lt;a href=&#34;https://www.virtualbox.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VirtualBox by Oracle&lt;/a&gt; as the hypervisor, so my solution must work with these tools.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Broadly, this rules out solutions like working from an external drive (I don&amp;rsquo;t, for example, want to need to drag the drive around with me if I need to move the laptop to another area for a short time), but allows for a solution that requires data to be copied between devices when switching devices.&lt;/p&gt;
+&lt;p&gt;The process I&amp;rsquo;ve engineered to achieve this is initially convoluted, but it seems to work. The complications are primarily during initial setup; thereafter there&amp;rsquo;s not much to do beyond copy/sync files, and for that I&amp;rsquo;ve found 
+&lt;a href=&#34;https://freefilesync.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FreeFileSync&lt;/a&gt; to be very useful.&lt;/p&gt;
+&lt;h1 id=&#34;setupinitialisation&#34;&gt;Setup/Initialisation&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Ensure the box is explicitly given a name, such that it will be identical on all devices within &lt;code&gt;VirtualBox&lt;/code&gt;, i.e., within the &lt;code&gt;Vagrantfile&lt;/code&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;  config.vm.provider &amp;quot;virtualbox&amp;quot; do |vb|
+    vb.name = &amp;quot;&amp;lt;machine-name&amp;gt;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Ensure the &lt;em&gt;exact&lt;/em&gt; same &lt;code&gt;VirtualBox&lt;/code&gt; path is used on both machines.
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;In my use, the laptop and desktop are quite differently configured. In particular, the laptop has a single drive and working partition (the ubiquitous &lt;code&gt;C:&lt;/code&gt;) while the desktop has a multitude of drives and partitions, with my virtual machines residing on &lt;code&gt;F:&lt;/code&gt;. To allow the same path to be used on both machines, I use a drive-mapped folder (see 
+&lt;a href=&#34;https://www.raymond.cc/blog/map-folder-or-directory-to-drive-letter-for-quick-and-easy-access/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Map a Folder to a Drive Letter for Quick and Easy Access • Raymond.CC&lt;/a&gt;), using the same drive on both devices but different mapped folders. e.g.:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Desktop: &lt;code&gt;V:&lt;/code&gt; &amp;ndash;&amp;gt; &lt;code&gt;\??\F:\davidfernandez\Virtualisation\Machines\VirtualBox&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Laptop: &lt;code&gt;V:&lt;/code&gt; &amp;ndash;&amp;gt; &lt;code&gt;\??\C:\Users\davidfernandez\Virtualisation\Machines\VirtualBox&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I use the registry-based method described in the article linked above, so an appropriate &lt;code&gt;.reg&lt;/code&gt; file for the desktop would be:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-registry&#34;&gt;Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices]
+&amp;quot;V:&amp;quot;=&amp;quot;\\??\\F:\\davidfernandez\\Virtualisation\\Machines\\VirtualBox&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;On &lt;code&gt;Device A&lt;/code&gt;, create the box via &lt;code&gt;vagrant up&lt;/code&gt;.
+&lt;ol&gt;
+&lt;li&gt;If using the folder mapping trick (above), change &lt;code&gt;VirtualBox&lt;/code&gt;&#39;s machine folder before creating the machine:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;VBoxManage.exe setproperty machinefolder V:&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Remember to reset/revert this afterwards.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Perform provisioning steps on &lt;code&gt;Device A&lt;/code&gt; as required.&lt;/li&gt;
+&lt;li&gt;On &lt;code&gt;Device B&lt;/code&gt;, create the box via &lt;code&gt;vagrant up&lt;/code&gt;, but (for efficiency) do not provision.
+&lt;ol&gt;
+&lt;li&gt;Again, if using folder mapping, change &lt;code&gt;VirtualBox&lt;/code&gt;&#39;s machine folder before creating the machine.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Transfer material from &lt;code&gt;Device A&lt;/code&gt; to &lt;code&gt;Device B&lt;/code&gt;:
+&lt;ol&gt;
+&lt;li&gt;All &lt;code&gt;VirtualBox&lt;/code&gt; files (e.g., &lt;code&gt;*.vbox&lt;/code&gt;, &lt;code&gt;*.vmdk&lt;/code&gt; etc.)&lt;/li&gt;
+&lt;li&gt;All &lt;code&gt;.vagrant/machines/&amp;lt;machine-name&amp;gt;&lt;/code&gt; files &lt;em&gt;except&lt;/em&gt;:
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;.vagrant/machines/&amp;lt;machine-name&amp;gt;/virtualbox/synced_folders&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.vagrant/machines/&amp;lt;machine-name&amp;gt;/virtualbox/vagrant_cwd&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;These files contain device-specific paths (the host location of shared folders and the host location of the &lt;code&gt;Vagrant&lt;/code&gt; project) and are best left matched to the device.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;On &lt;code&gt;Device B&lt;/code&gt;:
+&lt;ol&gt;
+&lt;li&gt;Replace the &lt;code&gt;uuid&lt;/code&gt; value for the &lt;code&gt;MachineRegistry/MachineEntry&lt;/code&gt; entry for the box in &lt;code&gt;~/.VirtualBox/VirtualBox.xml&lt;/code&gt; to match the value in the corresponding file on &lt;code&gt;Device A&lt;/code&gt;. In other words, this XML element should be the same on both device&amp;rsquo;s configuration, with the existing &lt;code&gt;uuid&lt;/code&gt; on &lt;code&gt;Device A&lt;/code&gt; use in both:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;MachineEntry uuid=&amp;quot;{4b62d0e5-cf93-48de-8be2-460562b87fbf}&amp;quot; src=&amp;quot;V:\&amp;lt;machine-name&amp;gt;\&amp;lt;machine-name&amp;gt;.vbox&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;p&gt;This seems to break &lt;code&gt;vagrant&lt;/code&gt;&#39;s ability to connect via ssh (i.e., specifically &lt;code&gt;vagrant ssh&lt;/code&gt; fails, seeming due to a bad keypair). However, as I don&amp;rsquo;t use &lt;code&gt;vagrant&lt;/code&gt;&#39;s ssh capabilities (that is, I connect via ssh using other tools), this doesn&amp;rsquo;t bother me and I have not spent time trying to resolve this. If you know what might be causing this specifically, and/or know a solution, let me know so I can update this post.&lt;/p&gt;
+&lt;h1 id=&#34;ongoing-sync&#34;&gt;Ongoing Sync&lt;/h1&gt;
+&lt;p&gt;Thereafter, it should be sufficient to simply synchronise the files listed in step 6 above.&lt;/p&gt;
+&lt;p&gt;To improve efficiency of syncing, I find it useful to use snapshots. Without this, synchronising means (possibly&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;) transferring &lt;em&gt;all&lt;/em&gt; virtual disk files/data. Using snapshots means you only transfer the virtual disks changed after the most recent snapshot.&lt;/p&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;The setup steps for this arrangement are a bit fiddly, but only need to be done once (per machine you wish to synchronise). Thereafter, maintaining synchronicity is quite straightforward. I&amp;rsquo;ve been using this setup for a while now, and, other than the non-working &lt;code&gt;vagrant&lt;/code&gt;-based ssh, everything works as expected. Hopefully this setup can be of use to you.&lt;/p&gt;
+&lt;!-- FOOTNOTES --&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Depending on how smart your synchronisation tool is. Some tools, like 
+&lt;a href=&#34;https://rsync.samba.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rsync&lt;/a&gt;, will only transfer the parts/chunks of files that are different, and therefore are much more efficient than those that transfer the entire content of files that are different. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Virtualisation and Provisioning</title>
+      <link>/post/homelab/virtualisation_and_provisioning/</link>
+      <pubDate>Sun, 18 Aug 2019 08:36:03 +1000</pubDate>
+      <guid>/post/homelab/virtualisation_and_provisioning/</guid>
+      <description>&lt;p&gt;This post describes the broad approach I have taken to setting-up and configuring the software system of my current primary home server (&lt;code&gt;Mammoth&lt;/code&gt;). Much of this might seem overkill for a home lab, but part of the point of having a home lab is having a place and projects in and with which I can practice, refine and extend my skills and knowledge in areas that might otherwise be considered the domain of a &amp;ldquo;professional&amp;rdquo;, of some sort&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;I won&amp;rsquo;t be presenting any code or code-like material here (that may come in subsequent posts), but will instead focus on my choice of tooling and methods. Also, note that this isn&amp;rsquo;t a tutorial on how to use any of these tools &amp;ndash; your favourite search engine will find those for you &amp;ndash; but rather a higher-level picture of how these different tools can be used together to solve a larger problem.&lt;/p&gt;
+&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;In general, I&amp;rsquo;m not a big fan of ad-hoc management of systems (e.g., servers) that handle anything remotely important. I like to automate (which then becomes documentation of sorts) and version-control. This aids greatly in problem-solving (if something goes wrong, the automation side can tell you exactly what was done, the revision control can let you go back to a working state) and repeatability (you might not ever need an exact duplicate of a system, but in my experience there are very often shared subsets).&lt;/p&gt;
+&lt;p&gt;I do, however, like the ability to experiment and play before settling on a solution, especially when I&amp;rsquo;m working with something new and unfamiliar. Having a way to try something, knowing you can either undo what you&amp;rsquo;ve done if you&amp;rsquo;re not happy, or be able to exactly replicate if you are, is invaluable.&lt;/p&gt;
+&lt;p&gt;To achieve this, I make use of virtualisation technologies and automated provisioning systems.&lt;/p&gt;
+&lt;h2 id=&#34;virtualisation&#34;&gt;Virtualisation&lt;/h2&gt;
+&lt;p&gt;Virtualisation is used to provide what is essentially a simulated&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; copy of the real environment. Within this environment, you can freely change things without worrying about messing up an otherwise functioning system. Using features like snapshotting, you can also create &amp;ldquo;known good&amp;rdquo; bookmarks of the system, that is, complete copies of the system state, to which you can return if and when required. In this manner, you can develop iteratively and progressively:&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+graph TB;
+
+A(Base System)
+B[Create Snapshot]
+C[Revert Snapshot]
+D(Snapshot)
+E[Modify]
+F{Happy?}
+G{Complete?}
+H(Done!)
+
+A --&gt; B
+B --&gt; D
+C --&gt; D
+D --&gt; E
+E --&gt; F
+F -- no --&gt; C
+F -- yes --&gt; G
+G -- no --&gt; B
+G -- yes --&gt; H
+&lt;/div&gt;
+&lt;p&gt;You essentially develop within a loop, starting with a known-good snapshot (which is initially created from whatever your starting point is), making changes, and either creating a new snapshot (if you&amp;rsquo;re happy with the changes) or reverting to the prior snapshot state (undoing) if you&amp;rsquo;re not happy. Rinse and repeat until your snapshot is your desired end state.&lt;/p&gt;
+&lt;p&gt;Because the system is virtual, and the snapshots are &lt;em&gt;complete&lt;/em&gt; system states, you can afford to be as aggressive in your experimenting as you like. Completely messed up the (virtual) partition table? Meh. Revert.&lt;/p&gt;
+&lt;p&gt;An important caveat to this is that a virtual system will only be an approximation of the real system in terms of hardware. For many use-cases, perhaps most, this will be close enough. Limiting the available resources (disk space, RAM, CPU) within the virtual machine to match the real system can be plenty good enough (e.g., can let you know if you&amp;rsquo;re pushing the system beyond what the real machine could handle). If, however, your system involves some particular hardware (not just that the system &lt;em&gt;has&lt;/em&gt; some particular hardware, but that your use of it &lt;em&gt;requires&lt;/em&gt; that particular hardware), then the virtual machine may not suffice.&lt;/p&gt;
+&lt;p&gt;To reiterate, virtualisation provides a controlled and reproduceable environment and context for development and experimentation.&lt;/p&gt;
+&lt;h2 id=&#34;automated-provisioning&#34;&gt;Automated Provisioning&lt;/h2&gt;
+&lt;p&gt;Automated provisioning is the process of using programmable tools to perform a variety of system setup operations, largely installing and configuring software packages. The notion of programmable tools here means you programatically define &amp;ndash; whether by scripts, &amp;ldquo;recipes&amp;rdquo;, or some form of configuration file &amp;ndash; what the tool should do. For example, to create a set of users, you might define a list of user specifications (each comprising a username, initial password and e-mail address) and specify that a &amp;ldquo;new user&amp;rdquo; operation be performed for each member of that list.&lt;/p&gt;
+&lt;p&gt;In this manner, the system is provisioned &amp;ndash; e.g., users are created &amp;ndash; according to a program that can be applied consistently. There is no need to remember the details of each user, nor the process of creating them. Especially when combined with a staging environment&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; such as the virtual machine described above, this method and mechanisms can provide a high degree of reliability and quality assurance, as the programmatic nature removes a key source of problems: human error&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;The automated provisioning process becomes the work performed in the &amp;ldquo;Modify&amp;rdquo; block in the diagram above.&lt;/p&gt;
+&lt;h1 id=&#34;thats-how-i-role&#34;&gt;That&amp;rsquo;s How I Role&lt;/h1&gt;
+&lt;p&gt;Having provided a broad, non-specific overview , I&amp;rsquo;ll now describe some of the details of my preferred approach.&lt;/p&gt;
+&lt;p&gt;It is also important to note that other solution exist. In particular, the tools I present here are those I&amp;rsquo;ve come to know and love. I find them to be very good at their jobs and very happily recommend them, both individually and in combination, but it can&amp;rsquo;t hurt for you to explore alternatives and find things that suit &lt;em&gt;you&lt;/em&gt;. The best tools are the ones &lt;em&gt;you&lt;/em&gt; can use productively, and the reality is that often means the ones you &lt;em&gt;like&lt;/em&gt; and not necessarily the ones that are technically superior. Find tools you&amp;rsquo;re happy to use, and spend time becoming proficient and productive with them.&lt;/p&gt;
+&lt;h1 id=&#34;virtualisation-hahahugoshortcode-s1-hbhb&#34;&gt;Virtualisation &lt;span class=&#34;subtle&#34;&gt;(again)&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;There exist a variety of virtualisation tools that sit at different levels in the virtualisation hierarchy, with the software used to create and run virtual machines often referred to as a hypervisor. I won&amp;rsquo;t attempt to describe or define them here; places such as Wikipedia&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; do a much better job. My long-term hypervisor preference is 
+&lt;a href=&#34;https://www.virtualbox.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VirtualBox by Oracle&lt;/a&gt;. It works well on the host systems that interest me (Windows and Linux on x86 hardware) and can run virtual machines with the guest systems that interest me (again, Windows and Linux on x86 virtualised hardware). Also, it is free and open-source&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;, which appeals to me.&lt;/p&gt;
+&lt;p&gt;My general preference regarding virtual machines is to manage them via 
+&lt;a href=&#34;https://www.vagrantup.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant by HashiCorp&lt;/a&gt;. Primarily, Vagrant is a tool to aid reproducability. It provides a means for defining, building and controlling virtual machines, sitting a level above the hypervisor. Among other things, it abstracts most areas of virtual machine creation and management such that dependence on a specific hypervisor is reduced&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;. A machine is defined via a configuration file that allows you to specify things like a base machine (e.g., a bare Ubuntu 18.04 installation) and resource tweaks (e.g., the amount of RAM, CPUs and such). This makes it very suitable for revision control (that is, the configuration can be placed under revision control), further aiding reproducibility.&lt;/p&gt;
+&lt;p&gt;In some cases, such as with &lt;code&gt;Mammoth&lt;/code&gt;, a suitable base machine does not exist. Specifically, &lt;code&gt;Mammoth&lt;/code&gt; uses a specific partitioning/filesystem layout that is not common enough for someone else to have created a matching base machine. This is where 
+&lt;a href=&#34;https://www.packer.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Packer by HashiCorp&lt;/a&gt; comes in. Packer is a tool for creating virtual machines from scratch. Whereas Vagrant requires an existing base machine (typically a minimally-configured machine with little more than a bare OS having been installed), Packer automates the process one would use to create that base machine (i.e., defining the base machine specs, such as RAM and disks, and automating OS installation and setup).&lt;/p&gt;
+&lt;p&gt;Neither Packer nor Vagrant are tied to any particular virtual machine manager (such as VirtualBox).&lt;/p&gt;
+&lt;p&gt;Step one, therefore, is to use Packer to create a base machine that resembles the real &lt;code&gt;Mammoth&lt;/code&gt; as closely as possible. &lt;code&gt;Mammoth&lt;/code&gt; uses the latest (&lt;code&gt;18.04&lt;/code&gt; at the time of its creation) long-term-support release of &lt;code&gt;Ubuntu&lt;/code&gt; (server variant). To avoid reinventing the wheel, the 
+&lt;a href=&#34;http://chef.github.io/bento/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bento&lt;/a&gt; project was used as a starting point, removing things that weren&amp;rsquo;t needed (e.g., retaining only the &lt;code&gt;ubuntu-18.04-amd64&lt;/code&gt; template) and modifying to suit (e.g., specifying primary drive partitions and filesystems).&lt;/p&gt;
+&lt;p&gt;As a side note, I have had much success with Bento boxes, and highly recommend them for general use. Many of their boxes are available for direct use with Vagrant (i.e., without needing to build with Packer) at 
+&lt;a href=&#34;https://app.vagrantup.com/bento&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant Cloud&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With this base machine in place, Vagrant (and VirtualBox) can then be used to create and run working virtual machines.&lt;/p&gt;
+&lt;h1 id=&#34;automated-provisioning-hahahugoshortcode-s2-hbhb&#34;&gt;Automated Provisioning &lt;span class=&#34;subtle&#34;&gt;(again)&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;As with virtualisation, there are a variety of methods and tools to achieve automated provisioning, from freeform scripting through to dedicated tools. As you might guess, I like dedicated tools, and in particular, I like and use 
+&lt;a href=&#34;https://www.ansible.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ansible by Red Hat&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;One of the primary reasons I prefer Ansible is its minimal requirements on both the control node (the machine doing the provisioning) and on managed nodes (the machines being provisioned). In the common case of provisioning a Linux machine, you simply need an SSH server and Python on the managed node&lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;, and Python on the controller&lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;. Ansible does not use or require a server/long-running process (beyond SSH) to run on the managed node (unlike a number of alternative tools), which is good for security (e.g., no additional ports to keep open or processes to keep secure) and resource use (e.g., no RAM or CPU time used by a process that is rarely used).&lt;/p&gt;
+&lt;p&gt;I try to follow Ansible guidelines and best-practices as best as possible, which includes separating host specifications (&amp;ldquo;staging&amp;rdquo; points the the virtual machine, &amp;ldquo;production&amp;rdquo; points to the real machine), using playbooks for middle-management, and using roles to do the heavy lifting.&lt;/p&gt;
+&lt;p&gt;Using roles allows you to avoid reinventing the wheel as much as possible, either by making use of someone else&amp;rsquo;s role definitions (such as those available on 
+&lt;a href=&#34;https://galaxy.ansible.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ansible Galaxy&lt;/a&gt;), or by creating something that you yourself can reuse on other projects (or publish if desired).&lt;/p&gt;
+&lt;p&gt;I like to break provisioning up into sequential stages, with each stage corresponding to one iteration of the &amp;ldquo;snapshot -&amp;gt; change -&amp;gt; snapshot&amp;rdquo; loop described earlier. In this way, reverting to a snapshot during development means reverting to the result of running a particular sequence of playbooks/stages. I also like to keep stages short and logically coherent, such that they themselves may be reused on other projects.&lt;/p&gt;
+&lt;!-- FOOTNOTES --&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;And indeed, most of the things I describe here I learnt working as a software engineer. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;I&amp;rsquo;m trying to give a description of things that is meaningful to a broad audience, not provide strictly-correct definitions. &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;With this sort of development work we often work in terms of different stages or environments: the production environment is the live, &amp;ldquo;real&amp;rdquo; system, the staging environment is as close an analogue as we can get to production where we perform final tests before applying changes to production, and the &amp;ldquo;development&amp;rdquo; environment is that in which most development work takes place before testing in &amp;ldquo;staging&amp;rdquo;. &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Assuming one has effectively used the staging environment to develop and test the programs to iron out wrinkles. &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;See, for example, 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Virtualization&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Virtualization - Wikipedia&lt;/a&gt; and 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Hypervisor&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hypervisor - Wikipedia&lt;/a&gt;. &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Except the extension pack, which is not open-source and, broadly speaking, is free for personal use but non-free for commercial user. See 
+&lt;a href=&#34;https://www.virtualbox.org/wiki/Licensing_FAQ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Licensing_FAQ – Oracle VM VirtualBox&lt;/a&gt;. &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;There are still some aspects of machine definition that depend on the specific hypervisor being used. &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:8&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Which covers most if not all modern Linux distributions, including the default for Raspberry Pi machines. &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:9&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Officially, Windows isn&amp;rsquo;t supported as a controller, though 
+&lt;a href=&#34;https://docs.microsoft.com/en-us/windows/wsl/faq&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Windows Subsystem for Linux&lt;/a&gt; overcomes this limitation and is the way I use Ansible. &lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
     
     <item>
       <title>Information Security: My Philosophy</title>
       <link>/post/infosec/information-security-00/</link>
       <pubDate>Sun, 11 Aug 2019 12:23:49 +1000</pubDate>
       <guid>/post/infosec/information-security-00/</guid>
-      <description>
-
-&lt;p&gt;Information Security is something that interests me. I would argue that it should be of interest to &lt;em&gt;anyone&lt;/em&gt; and &lt;strong&gt;&lt;em&gt;everyone&lt;/em&gt;&lt;/strong&gt; involved in managing or handling data, especially that of other people&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, which pretty much means almost everyone working in software development or information technology more generally. It should also include anyone making choices about what software or systems they use to manage data, even if that&amp;rsquo;s not part of their job description.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;#takeaway&#34;&gt;TLDR;&lt;/a&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;Information Security is something that interests me. I would argue that it should be of interest to &lt;em&gt;anyone&lt;/em&gt; and &lt;strong&gt;&lt;em&gt;everyone&lt;/em&gt;&lt;/strong&gt; involved in managing or handling data, especially that of other people&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, which pretty much means almost everyone working in software development or information technology more generally. It should also include anyone making choices about what software or systems they use to manage data, even if that&amp;rsquo;s not part of their job description.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;#takeaway&#34;&gt;TLDR;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;definitions&#34;&gt;Definitions&lt;/h1&gt;
-
-&lt;p&gt;As a first point, I should clarify what I mean by information security, as varying definitions exist. I tend to follow the definition provided in ISO/IEC 27000&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-
+&lt;p&gt;As a first point, I should clarify what I mean by information security, as varying definitions exist. I tend to follow the definition provided in ISO/IEC 27000&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;definition 3.28: preservation of &lt;em&gt;confidentiality&lt;/em&gt;, &lt;em&gt;integrity&lt;/em&gt; and &lt;em&gt;availability&lt;/em&gt; of information&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;As noted in the footnote to that definition, other properties, such as authenticity and reliability, can also be involved, though, for the moment at least, I will maintain focus on the three above.&lt;/p&gt;
-
 &lt;p&gt;These properties will be relevant to all users of data, though the requirements can vary widely and this must be understood.&lt;/p&gt;
-
 &lt;h2 id=&#34;integrity&#34;&gt;Integrity&lt;/h2&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;definition 3.36: property of accuracy and completeness&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;definition 3.36: property of accuracy and completeness&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;Broadly speaking I consider data integrity to simply mean that the data is what you expect it to be, which generally means that, for a given piece of data, what you read tomorrow is what you&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; wrote today.&lt;/p&gt;
-
+&lt;p&gt;Broadly speaking I consider data integrity to simply mean that the data is what you expect it to be, which generally means that, for a given piece of data, what you read tomorrow is what you&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; wrote today.&lt;/p&gt;
 &lt;p&gt;Almost all users will have about the same integrity requirements: they want the data they retrieve to be the data they saved. They do not want the data to be changed in unexpected ways, whether as a result of malicious action (e.g., &amp;ldquo;hacking&amp;rdquo;), user error (e.g., accidental deletion), or system failure (e.g., a hardware crash).&lt;/p&gt;
-
-&lt;p&gt;That said, there may be some instances where this isn&amp;rsquo;t strictly true. An example may be an image storage system whereby uploaded images are (re-)compressed in a lossy manner (e.g., JPEG compression) in order to reduce size (and hence, perhaps, allow the user to store more images).&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; In this case, what the user later retrieves (the compressed image) is not exactly bit-for-bit the same as that which they sent for storage.&lt;/p&gt;
-
+&lt;p&gt;That said, there may be some instances where this isn&amp;rsquo;t strictly true. An example may be an image storage system whereby uploaded images are (re-)compressed in a lossy manner (e.g., JPEG compression) in order to reduce size (and hence, perhaps, allow the user to store more images).&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; In this case, what the user later retrieves (the compressed image) is not exactly bit-for-bit the same as that which they sent for storage.&lt;/p&gt;
 &lt;h2 id=&#34;availability&#34;&gt;Availability&lt;/h2&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;definition 3.7: property of being accessible and usable on demand by an authorized entity&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;definition 3.7: property of being accessible and usable on demand by an authorized entity&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;In simple terms, I consider this to mean that everyone that should have access to the data is able to get it in a timely manner.&lt;/p&gt;
-
-&lt;p&gt;Availability requirements will differ: some users will want/need data immediately&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, some don&amp;rsquo;t mind to wait. All want to get it eventually though.&lt;/p&gt;
-
+&lt;p&gt;Availability requirements will differ: some users will want/need data immediately&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, some don&amp;rsquo;t mind to wait. All want to get it eventually though.&lt;/p&gt;
 &lt;h2 id=&#34;confidentiality&#34;&gt;Confidentiality&lt;/h2&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;definition 3.10: property that information is not made available or disclosed to unauthorized individuals, entities, or
-processes&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;definition 3.10: property that information is not made available or disclosed to unauthorized individuals, entities, or 
+processes&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;I consider this to mean that access to data &amp;ndash; including, in some cases, mere knowledge of the &lt;em&gt;existence&lt;/em&gt; of the data &amp;ndash; can be restricted and controlled.&lt;/p&gt;
-
-&lt;p&gt;Confidentiality requirements will differ: some don&amp;rsquo;t care who has access&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;, some &lt;em&gt;want&lt;/em&gt; all to access (e.g., someone in marketing may want as many people as possible to view their pitch), some want strict controls (few people want anyone but themselves and perhaps their bank to see their bank records).&lt;/p&gt;
-
+&lt;p&gt;Confidentiality requirements will differ: some don&amp;rsquo;t care who has access&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;, some &lt;em&gt;want&lt;/em&gt; all to access (e.g., someone in marketing may want as many people as possible to view their pitch), some want strict controls (few people want anyone but themselves and perhaps their bank to see their bank records).&lt;/p&gt;
 &lt;h2 id=&#34;authenticity&#34;&gt;Authenticity&lt;/h2&gt;
-
 &lt;p&gt;One of the &amp;ldquo;other properties&amp;rdquo; mentioned in the opening information security definition that I&amp;rsquo;d like to expand on is authenticity.&lt;/p&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;definition 3.6: property that an entity is what it claims to be&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;definition 3.6: property that an entity is what it claims to be&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;I like to think of this in terms of trust or provenance, that is, being able to trust, verify or confirm the stated source of data.&lt;/p&gt;
-
 &lt;p&gt;As with all the other properties, requirements will vary. In some instances, as long as access-control mechanisms are in place (i.e., only authorised users have access), it may not matter which &lt;em&gt;specific&lt;/em&gt; authorised user has modified data. In other cases (such as a hospital patient&amp;rsquo;s medication requirements), knowing exactly which user made the changes &amp;ndash; and possibly knowing the entire change history &amp;ndash; is of critical importance.&lt;/p&gt;
-
 &lt;h1 id=&#34;lax-approach-hahahugoshortcode-s0-hbhb&#34;&gt;Lax Approach &lt;span class=&#34;subtle&#34;&gt;(not the airport)&lt;/span&gt;&lt;/h1&gt;
-
 &lt;p&gt;Too often, it seems, information security is an afterthought. It isn&amp;rsquo;t often part of a user&amp;rsquo;s core requirements (they want to use the data to do things that are important to them), though this is changing as more people become aware of what can happen when information is &lt;em&gt;not&lt;/em&gt; secured. As a result of this lack of user pressure, the need to keep information secure can fall by the wayside (market pressures can mean it is sometimes difficult to justify spending resources investigating/developing features that the user won&amp;rsquo;t explicitly demand).&lt;/p&gt;
-
-&lt;p&gt;In many instances, I believe that information security is seen as non-critical because of the parallels drawn with physical security, e.g., physical locks and keys on doors. By and large, physical security mechanisms exist to protect physical resources from theft, damage or other such malicious acts. To prioritise security of this form essentially requires belief that a) one has resources worth protecting, and b) there exist malicious others that would try to gain access to those resources. In the world of information, I suggest that most people can evaluate the first point well enough&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;, but perhaps don&amp;rsquo;t do so well with the second&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;In the physical world, generally, the cost of attempting to gain access to restricted resources (e.g., research time, time to break open a lock and door, the risk and consequence of being caught and so-on) is relatively high, so it makes sense that attackers would tend to choose targets relatively carefully such that the potential gains outweigh the potential costs. In the information world, however, the cost of attempting access can be exceptionally low, approaching zero when considering the scale of attack provided by mechanisms like botnets&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34;&gt;9&lt;/a&gt;&lt;/sup&gt; and when the global, cross-border nature of things means law enforcement is often powerless. In addition, as mechanisms such as ransomware&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34;&gt;10&lt;/a&gt;&lt;/sup&gt; have demonstrated, modes of attack that aren&amp;rsquo;t often seen in the physical world can become very attractive to attackers in the information world.&lt;/p&gt;
-
+&lt;p&gt;In many instances, I believe that information security is seen as non-critical because of the parallels drawn with physical security, e.g., physical locks and keys on doors. By and large, physical security mechanisms exist to protect physical resources from theft, damage or other such malicious acts. To prioritise security of this form essentially requires belief that a) one has resources worth protecting, and b) there exist malicious others that would try to gain access to those resources. In the world of information, I suggest that most people can evaluate the first point well enough&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;, but perhaps don&amp;rsquo;t do so well with the second&lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;In the physical world, generally, the cost of attempting to gain access to restricted resources (e.g., research time, time to break open a lock and door, the risk and consequence of being caught and so-on) is relatively high, so it makes sense that attackers would tend to choose targets relatively carefully such that the potential gains outweigh the potential costs. In the information world, however, the cost of attempting access can be exceptionally low, approaching zero when considering the scale of attack provided by mechanisms like botnets&lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt; and when the global, cross-border nature of things means law enforcement is often powerless. In addition, as mechanisms such as ransomware&lt;sup id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;10&lt;/a&gt;&lt;/sup&gt; have demonstrated, modes of attack that aren&amp;rsquo;t often seen in the physical world can become very attractive to attackers in the information world.&lt;/p&gt;
 &lt;p&gt;The consequence is that resources that would not be targets for attackers in the physical world &lt;em&gt;are&lt;/em&gt; targets in the information world. As a result, I think that questions that might be relevant in physical security, such as &amp;ldquo;why would anyone want to steal my stuff?&amp;rdquo; or &amp;ldquo;who would go after me?&amp;rdquo; are not so useful when considering information security, as the broad answers that present real threats can simply be &amp;ldquo;because they can&amp;rdquo; and &amp;ldquo;anyone looking to make a quick buck&amp;rdquo;.&lt;/p&gt;
-
 &lt;p&gt;In short, to those without experience or interest in the area, the risks associated with poor information security are not generally as well understood or appreciated as those for physical security.&lt;/p&gt;
-
 &lt;h1 id=&#34;more-than-just-stopping-the-bad-guys&#34;&gt;More Than Just Stopping The Bad Guys&lt;/h1&gt;
-
 &lt;p&gt;In the section above I focussed on the notion of protecting information from those seeking to do harm of some sort (theft, extortion, etc.), but information security is about more that just that. There are many ways, beyond malice, in which the security of information can be compromised, and these should be considered even, and perhaps especially, in cases where protection against attack is not considered important (e.g., within an isolated/offline system).&lt;/p&gt;
-
-&lt;p&gt;One source of compromise is plain old user error, or PICNIC&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:11&#34;&gt;&lt;a href=&#34;#fn:11&#34;&gt;11&lt;/a&gt;&lt;/sup&gt; as it&amp;rsquo;s sometimes known. I&amp;rsquo;d hazard a guess that almost everyone (if not everyone) who has ever used a computer has at some stage accidentally deleted a file. Or worse&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:12&#34;&gt;&lt;a href=&#34;#fn:12&#34;&gt;12&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;A second set of sources are system faults. This broad category covers many things including hardware failures, software crashes, natural disasters (e.g., floods that damage/destroy hardware) and unexpected user responses&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:13&#34;&gt;&lt;a href=&#34;#fn:13&#34;&gt;13&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
+&lt;p&gt;One source of compromise is plain old user error, or PICNIC&lt;sup id=&#34;fnref:11&#34;&gt;&lt;a href=&#34;#fn:11&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;11&lt;/a&gt;&lt;/sup&gt; as it&amp;rsquo;s sometimes known. I&amp;rsquo;d hazard a guess that almost everyone (if not everyone) who has ever used a computer has at some stage accidentally deleted a file. Or worse&lt;sup id=&#34;fnref:12&#34;&gt;&lt;a href=&#34;#fn:12&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;12&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;A second set of sources are system faults. This broad category covers many things including hardware failures, software crashes, natural disasters (e.g., floods that damage/destroy hardware) and unexpected user responses&lt;sup id=&#34;fnref:13&#34;&gt;&lt;a href=&#34;#fn:13&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;13&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;p&gt;In both cases there&amp;rsquo;s no ill intent, but that matters little if your critical data is gone.&lt;/p&gt;
-
-&lt;p&gt;For risks such as these, one really needs to be thinking beyond the threats with parallels in traditional (physical) security. It really isn&amp;rsquo;t just about &amp;ldquo;who are the bad guys and how could they get me?&amp;rdquo;, it&amp;rsquo;s about &amp;ldquo;how is my data at risk?&amp;rdquo;.&lt;/p&gt;
-
+&lt;p&gt;For risks such as these, one really needs to be thinking beyond the threats with parallels in traditional (physical) security. It really isn&amp;rsquo;t just about &amp;ldquo;who are the bad guys and how could they get me?&amp;quot;, it&amp;rsquo;s about &amp;ldquo;how is my data at risk?&amp;quot;.&lt;/p&gt;
 &lt;h1 id=&#34;philosophy&#34;&gt;Philosophy&lt;/h1&gt;
-
 &lt;p&gt;With these definitions and ideas in mind, I present my philosophy:&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;Information Security should be considered a foundational aspect of the specification and design of systems managing data.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;This isn&amp;rsquo;t revolutionary or outside the square, and I don&amp;rsquo;t expect my view is unique, but I don&amp;rsquo;t think it&amp;rsquo;s the norm yet either.&lt;/p&gt;
-
-&lt;p&gt;Also, I don&amp;rsquo;t mean that every system should have two-factor authentication, signed certificates, redundant storage, 256-bit encrypted channels or any other particular security feature. Rather, when specifying or designing such a system, the properties defined and described above should be explicitly considered and appropriate questions asked. &amp;ldquo;How is the information secured?&amp;rdquo; should be as important a question as &amp;ldquo;How much will this cost?&amp;rdquo;.&lt;/p&gt;
-
+&lt;p&gt;Also, I don&amp;rsquo;t mean that every system should have two-factor authentication, signed certificates, redundant storage, 256-bit encrypted channels or any other particular security feature. Rather, when specifying or designing such a system, the properties defined and described above should be explicitly considered and appropriate questions asked. &amp;ldquo;How is the information secured?&amp;rdquo; should be as important a question as &amp;ldquo;How much will this cost?&amp;quot;.&lt;/p&gt;
 &lt;p&gt;Addressing information security concerns is fundamentally an exercise in risk management and so, if helpful, the language and tools of risk management can be used to aid in the determination of how information will be secured. This can be especially helpful for those that don&amp;rsquo;t have a background in information security (or information technology more generally) but are familiar with risk management (such as many in management roles).&lt;/p&gt;
-
 &lt;h1 id=&#34;takeaway&#34;&gt;Takeaway&lt;/h1&gt;
-
 &lt;p&gt;I&amp;rsquo;ve taken a somewhat engineering- and slightly business-oriented approach to things here, but I firmly believe that these ideas are applicable to non-professionals too. I suggest that a person&amp;rsquo;s family photos are as valuable to them as financial records are to a business, and quite possibly more valuable.&lt;/p&gt;
-
 &lt;p&gt;To that end, I leave you with this:&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;Any information that is of value to you is worth keeping secure.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
+&lt;!-- FOOTNOTES --&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;My general view with this sort of thing is roughly this: if you mess up your own stuff, &lt;em&gt;you&lt;/em&gt; have to deal with the consequences. If you mess up someone else&amp;rsquo;s stuff, &lt;em&gt;they&lt;/em&gt; have to deal with the consequences, which I think is worse (i.e., having to clean up someone else&amp;rsquo;s mess).
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;&lt;a href=&#34;https://www.iso.org/standard/73906.html&#34; target=&#34;_blank&#34;&gt;ISO/IEC 27000:2018 - Information technology &amp;ndash; Security techniques &amp;ndash; Information security management systems &amp;ndash; Overview and vocabulary&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:3&#34;&gt;Or some other authorised user/process/agent.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:4&#34;&gt;Google Photos allows users to make such a choice. See &lt;a href=&#34;https://support.google.com/photos/answer/6220791?co=GENIE.Platform%3DDesktop&amp;amp;hl=en&#34; target=&#34;_blank&#34;&gt;Choose the upload size of your photos and videos - Google Photos Help&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:5&#34;&gt;Even &amp;ldquo;immediately&amp;rdquo; can vary: for high-frequency traders, &amp;ldquo;immediately&amp;rdquo; can mean within microseconds of making a request, while for most people, waiting a few seconds to retrieve an email message is perfectly fine.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:5&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:6&#34;&gt;Though even this can vary, for example, between who can &lt;em&gt;read&lt;/em&gt; the data and who can &lt;em&gt;modify&lt;/em&gt; it.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:6&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:7&#34;&gt;Though I&amp;rsquo;d also suggest that too many people undervalue personal information that can be misused with regards to identity theft.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:7&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:8&#34;&gt;It&amp;rsquo;s not too uncommon to hear variations on &amp;ldquo;why would anyone want to go after me?&amp;rdquo;.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:8&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:9&#34;&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Botnet&#34; target=&#34;_blank&#34;&gt;Botnet - Wikipedia&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:9&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:10&#34;&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Ransomware&#34; target=&#34;_blank&#34;&gt;Ransomware - Wikipedia&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:10&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:11&#34;&gt;&lt;a href=&#34;https://en.wiktionary.org/wiki/PEBCAK&#34; target=&#34;_blank&#34;&gt;PEBCAK - Wiktionary&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:11&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:12&#34;&gt;For example, these &lt;a href=&#34;https://blog.envisionitsolutions.com/six-horror-stories-of-data-loss&#34; target=&#34;_blank&#34;&gt;Six Horror Stories of Data Loss&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:12&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:13&#34;&gt;Such as Unintentional &lt;a href=&#34;https://en.wikipedia.org/wiki/Denial-of-service_attack#Unintentional_denial-of-service&#34; target=&#34;_blank&#34;&gt;Denial-of-service attack - Wikipedia&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:13&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;My general view with this sort of thing is roughly this: if you mess up your own stuff, &lt;em&gt;you&lt;/em&gt; have to deal with the consequences. If you mess up someone else&amp;rsquo;s stuff, &lt;em&gt;they&lt;/em&gt; have to deal with the consequences, which I think is worse (i.e., having to clean up someone else&amp;rsquo;s mess). &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://www.iso.org/standard/73906.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ISO/IEC 27000:2018 - Information technology &amp;ndash; Security techniques &amp;ndash; Information security management systems &amp;ndash; Overview and vocabulary&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Or some other authorised user/process/agent. &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Google Photos allows users to make such a choice. See 
+&lt;a href=&#34;https://support.google.com/photos/answer/6220791?co=GENIE.Platform%3DDesktop&amp;amp;hl=en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Choose the upload size of your photos and videos - Google Photos Help&lt;/a&gt; &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Even &amp;ldquo;immediately&amp;rdquo; can vary: for high-frequency traders, &amp;ldquo;immediately&amp;rdquo; can mean within microseconds of making a request, while for most people, waiting a few seconds to retrieve an email message is perfectly fine. &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Though even this can vary, for example, between who can &lt;em&gt;read&lt;/em&gt; the data and who can &lt;em&gt;modify&lt;/em&gt; it. &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Though I&amp;rsquo;d also suggest that too many people undervalue personal information that can be misused with regards to identity theft. &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:8&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;It&amp;rsquo;s not too uncommon to hear variations on &amp;ldquo;why would anyone want to go after me?&amp;quot;. &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:9&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Botnet&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Botnet - Wikipedia&lt;/a&gt; &lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:10&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Ransomware&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ransomware - Wikipedia&lt;/a&gt; &lt;a href=&#34;#fnref:10&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:11&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://en.wiktionary.org/wiki/PEBCAK&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PEBCAK - Wiktionary&lt;/a&gt; &lt;a href=&#34;#fnref:11&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:12&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;For example, these 
+&lt;a href=&#34;https://blog.envisionitsolutions.com/six-horror-stories-of-data-loss&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Six Horror Stories of Data Loss&lt;/a&gt; &lt;a href=&#34;#fnref:12&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:13&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Such as Unintentional 
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Denial-of-service_attack#Unintentional_denial-of-service&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Denial-of-service attack - Wikipedia&lt;/a&gt; &lt;a href=&#34;#fnref:13&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;
+&lt;/section&gt;
 </description>
     </item>
     
@@ -169,19 +356,18 @@ processes&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href
       <pubDate>Wed, 07 Aug 2019 13:54:53 +1000</pubDate>
       <guid>/post/this_website/post_number_one/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m not sure which attempt this is. Only the second, I think. The last one was quite some time ago though. It chugged along ok for a while, but tapered off and dropped into oblivion. Hopefully this one sticks.&lt;/p&gt;
-
 &lt;p&gt;I&amp;rsquo;m also not sure what I shall be posting here. A mix of things probably. I&amp;rsquo;d like to document some of my hobby projects, share some non-technical things (like parks and playgrounds I&amp;rsquo;ve discovered and enjoyed) and also describe some more serious professional points (like what services I can offer and how I can help &lt;em&gt;you&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;Without wishing to get too philosophical, it is said that &lt;span class=&#34;iquote&#34;&gt;A journey of a thousand miles begins with a single step&lt;/span&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. This is that first step.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
+&lt;p&gt;Without wishing to get too philosophical, it is said that &lt;span class=&#34;iquote&#34;&gt;A journey of a thousand miles begins with a single step&lt;/span&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. This is that first step.&lt;/p&gt;
+&lt;!-- FOOTNOTES --&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/A_journey_of_a_thousand_miles_begins_with_a_single_step&#34; target=&#34;_blank&#34;&gt;A journey of a thousand miles begins with a single step - Wikipedia&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;&amp;uArr;&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://en.wikipedia.org/wiki/A_journey_of_a_thousand_miles_begins_with_a_single_step&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A journey of a thousand miles begins with a single step - Wikipedia&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;
+&lt;/section&gt;
 </description>
     </item>
     

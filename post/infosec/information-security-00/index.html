@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 4.5.0">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
 
   
 
@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Information Security is something that interests me. I would argue that it should be of interest to anyone and everyone involved in managing or handling data, especially that of other people1, which pretty much means almost everyone working in software development or information technology more generally. It should also include anyone making choices about what software or systems they use to manage data, even if that&rsquo;s not part of their job description.">
+  <meta name="description" content="Information Security is something that interests me. I would argue that it should be of interest to anyone and everyone involved in managing or handling data, especially that of other people1, which pretty much means almost everyone working in software development or information technology more generally.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/infosec/information-security-00/">
@@ -44,12 +44,15 @@
 
   
   
+
+  
+  
   
   
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
     
     
@@ -60,16 +63,128 @@
       
       
         
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
         
       
     
 
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
     
 
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
     
 
   
@@ -83,36 +198,64 @@
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.bf4a46cd1baec25a8bf5df14850bc315.css">
+  
+  <link rel="stylesheet" href="/css/academic.css">
 
   
 
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145696525-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-145696525-1', { 'anonymize_ip': true });
+
   
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
   
-    <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'UA-145696525-1', 'auto');
-      ga('set', 'anonymizeIp', true);
-      ga('require', 'eventTracker');
-      ga('require', 'outboundLinkTracker');
-      ga('require', 'urlChangeTracker');
-      ga('send', 'pageview');
-    </script>
-    <script async src="https://www.google-analytics.com/analytics.js"></script>
-    
-    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
-    
-  
-  
+
 
   
 
   <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon-32.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
   <link rel="canonical" href="/post/infosec/information-security-00/">
 
+  
   
   
   
@@ -129,8 +272,8 @@
   <meta property="og:site_name" content="i.am.david.fernandez">
   <meta property="og:url" content="/post/infosec/information-security-00/">
   <meta property="og:title" content="Information Security: My Philosophy | i.am.david.fernandez">
-  <meta property="og:description" content="Information Security is something that interests me. I would argue that it should be of interest to anyone and everyone involved in managing or handling data, especially that of other people1, which pretty much means almost everyone working in software development or information technology more generally. It should also include anyone making choices about what software or systems they use to manage data, even if that&rsquo;s not part of their job description."><meta property="og:image" content="/img/icon-192.png">
-  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="Information Security is something that interests me. I would argue that it should be of interest to anyone and everyone involved in managing or handling data, especially that of other people1, which pretty much means almost everyone working in software development or information technology more generally."><meta property="og:image" content="img/map[gravatar:%!s(bool=true) shape:square]">
+  <meta property="twitter:image" content="img/map[gravatar:%!s(bool=true) shape:square]"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2019-08-11T12:23:49&#43;10:00">
@@ -149,19 +292,6 @@
 
 
   
-
-
-
-
-
-  
-
-
-
-
-
-  
-
 
 
 
@@ -189,10 +319,10 @@
     "name": "i.am.david.fernandez",
     "logo": {
       "@type": "ImageObject",
-      "url": "/img/icon-512.png"
+      "url": "/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Information Security is something that interests me. I would argue that it should be of interest to anyone and everyone involved in managing or handling data, especially that of other people1, which pretty much means almost everyone working in software development or information technology more generally. It should also include anyone making choices about what software or systems they use to manage data, even if that\u0026rsquo;s not part of their job description."
+  "description": "Information Security is something that interests me. I would argue that it should be of interest to anyone and everyone involved in managing or handling data, especially that of other people1, which pretty much means almost everyone working in software development or information technology more generally."
 }
 </script>
 
@@ -202,10 +332,14 @@
 
 
   
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-<script>
+  
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js" integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css" integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q=" crossorigin="anonymous">
+  
+  <script>
   window.addEventListener("load", function(){
     window.cookieconsent.initialise({
       "palette": {
@@ -223,10 +357,10 @@
         "message": "This website uses cookies to ensure you get the best experience on our website.",
         "dismiss": "Got it!",
         "link": "Learn more",
-        "href": "https://cookies.insites.com"
+        "href": "/privacy/"
       }
     })});
-</script>
+  </script>
 
 
 
@@ -262,7 +396,7 @@
 
 
 
-<link rel="stylesheet" href="/css/custom.min.f71a1af918dd0928b58c9ec8e59f2a1e.css">
+<link rel="stylesheet" href="/css/custom.min.82c9197d3a5dbe8e4da8a6ea8a8fe6c0.css">
 
 
   <title>Information Security: My Philosophy | i.am.david.fernandez</title>
@@ -304,24 +438,41 @@
 
 
   
-<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
   <div class="container">
 
     
+    <div class="d-none d-lg-inline-flex">
       <a class="navbar-brand" href="/">i.am.david.fernandez</a>
-      
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-      </button>
-      
+    </div>
+    
 
     
-    <div class="collapse navbar-collapse" id="navbar">
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">i.am.david.fernandez</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
 
       
-      
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav d-md-inline-flex">
         
 
         
@@ -449,29 +600,28 @@
         
 
       
+
+        
       </ul>
-      <ul class="navbar-nav ml-auto">
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
       
 
-        
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
 
-        
-        <li class="nav-item">
-          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
-        </li>
-        
+      
 
-        
+    </ul>
 
-        
-        <li class="nav-item">
-          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
-        </li>
-        
-
-      </ul>
-
-    </div>
   </div>
 </nav>
 
@@ -503,7 +653,6 @@
 
   
     
-
 
 
 <div class="article-metadata">
@@ -542,8 +691,163 @@
   
   
 
-  
+</div>
+
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Information Security is something that interests me. I would argue that it should be of interest to <em>anyone</em> and <strong><em>everyone</em></strong> involved in managing or handling data, especially that of other people<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, which pretty much means almost everyone working in software development or information technology more generally. It should also include anyone making choices about what software or systems they use to manage data, even if that&rsquo;s not part of their job description.</p>
+<p>
+<a href="#takeaway">TLDR;</a></p>
+<h1 id="definitions">Definitions</h1>
+<p>As a first point, I should clarify what I mean by information security, as varying definitions exist. I tend to follow the definition provided in ISO/IEC 27000<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>:</p>
+<blockquote>
+<p>definition 3.28: preservation of <em>confidentiality</em>, <em>integrity</em> and <em>availability</em> of information</p>
+</blockquote>
+<p>As noted in the footnote to that definition, other properties, such as authenticity and reliability, can also be involved, though, for the moment at least, I will maintain focus on the three above.</p>
+<p>These properties will be relevant to all users of data, though the requirements can vary widely and this must be understood.</p>
+<h2 id="integrity">Integrity</h2>
+<blockquote>
+<p>definition 3.36: property of accuracy and completeness<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+</blockquote>
+<p>Broadly speaking I consider data integrity to simply mean that the data is what you expect it to be, which generally means that, for a given piece of data, what you read tomorrow is what you<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> wrote today.</p>
+<p>Almost all users will have about the same integrity requirements: they want the data they retrieve to be the data they saved. They do not want the data to be changed in unexpected ways, whether as a result of malicious action (e.g., &ldquo;hacking&rdquo;), user error (e.g., accidental deletion), or system failure (e.g., a hardware crash).</p>
+<p>That said, there may be some instances where this isn&rsquo;t strictly true. An example may be an image storage system whereby uploaded images are (re-)compressed in a lossy manner (e.g., JPEG compression) in order to reduce size (and hence, perhaps, allow the user to store more images).<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> In this case, what the user later retrieves (the compressed image) is not exactly bit-for-bit the same as that which they sent for storage.</p>
+<h2 id="availability">Availability</h2>
+<blockquote>
+<p>definition 3.7: property of being accessible and usable on demand by an authorized entity<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+</blockquote>
+<p>In simple terms, I consider this to mean that everyone that should have access to the data is able to get it in a timely manner.</p>
+<p>Availability requirements will differ: some users will want/need data immediately<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, some don&rsquo;t mind to wait. All want to get it eventually though.</p>
+<h2 id="confidentiality">Confidentiality</h2>
+<blockquote>
+<p>definition 3.10: property that information is not made available or disclosed to unauthorized individuals, entities, or 
+processes<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+</blockquote>
+<p>I consider this to mean that access to data &ndash; including, in some cases, mere knowledge of the <em>existence</em> of the data &ndash; can be restricted and controlled.</p>
+<p>Confidentiality requirements will differ: some don&rsquo;t care who has access<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>, some <em>want</em> all to access (e.g., someone in marketing may want as many people as possible to view their pitch), some want strict controls (few people want anyone but themselves and perhaps their bank to see their bank records).</p>
+<h2 id="authenticity">Authenticity</h2>
+<p>One of the &ldquo;other properties&rdquo; mentioned in the opening information security definition that I&rsquo;d like to expand on is authenticity.</p>
+<blockquote>
+<p>definition 3.6: property that an entity is what it claims to be<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+</blockquote>
+<p>I like to think of this in terms of trust or provenance, that is, being able to trust, verify or confirm the stated source of data.</p>
+<p>As with all the other properties, requirements will vary. In some instances, as long as access-control mechanisms are in place (i.e., only authorised users have access), it may not matter which <em>specific</em> authorised user has modified data. In other cases (such as a hospital patient&rsquo;s medication requirements), knowing exactly which user made the changes &ndash; and possibly knowing the entire change history &ndash; is of critical importance.</p>
+<h1 id="lax-approach-hahahugoshortcode-s0-hbhb">Lax Approach <span class="subtle">(not the airport)</span></h1>
+<p>Too often, it seems, information security is an afterthought. It isn&rsquo;t often part of a user&rsquo;s core requirements (they want to use the data to do things that are important to them), though this is changing as more people become aware of what can happen when information is <em>not</em> secured. As a result of this lack of user pressure, the need to keep information secure can fall by the wayside (market pressures can mean it is sometimes difficult to justify spending resources investigating/developing features that the user won&rsquo;t explicitly demand).</p>
+<p>In many instances, I believe that information security is seen as non-critical because of the parallels drawn with physical security, e.g., physical locks and keys on doors. By and large, physical security mechanisms exist to protect physical resources from theft, damage or other such malicious acts. To prioritise security of this form essentially requires belief that a) one has resources worth protecting, and b) there exist malicious others that would try to gain access to those resources. In the world of information, I suggest that most people can evaluate the first point well enough<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>, but perhaps don&rsquo;t do so well with the second<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>.</p>
+<p>In the physical world, generally, the cost of attempting to gain access to restricted resources (e.g., research time, time to break open a lock and door, the risk and consequence of being caught and so-on) is relatively high, so it makes sense that attackers would tend to choose targets relatively carefully such that the potential gains outweigh the potential costs. In the information world, however, the cost of attempting access can be exceptionally low, approaching zero when considering the scale of attack provided by mechanisms like botnets<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> and when the global, cross-border nature of things means law enforcement is often powerless. In addition, as mechanisms such as ransomware<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup> have demonstrated, modes of attack that aren&rsquo;t often seen in the physical world can become very attractive to attackers in the information world.</p>
+<p>The consequence is that resources that would not be targets for attackers in the physical world <em>are</em> targets in the information world. As a result, I think that questions that might be relevant in physical security, such as &ldquo;why would anyone want to steal my stuff?&rdquo; or &ldquo;who would go after me?&rdquo; are not so useful when considering information security, as the broad answers that present real threats can simply be &ldquo;because they can&rdquo; and &ldquo;anyone looking to make a quick buck&rdquo;.</p>
+<p>In short, to those without experience or interest in the area, the risks associated with poor information security are not generally as well understood or appreciated as those for physical security.</p>
+<h1 id="more-than-just-stopping-the-bad-guys">More Than Just Stopping The Bad Guys</h1>
+<p>In the section above I focussed on the notion of protecting information from those seeking to do harm of some sort (theft, extortion, etc.), but information security is about more that just that. There are many ways, beyond malice, in which the security of information can be compromised, and these should be considered even, and perhaps especially, in cases where protection against attack is not considered important (e.g., within an isolated/offline system).</p>
+<p>One source of compromise is plain old user error, or PICNIC<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup> as it&rsquo;s sometimes known. I&rsquo;d hazard a guess that almost everyone (if not everyone) who has ever used a computer has at some stage accidentally deleted a file. Or worse<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup>.</p>
+<p>A second set of sources are system faults. This broad category covers many things including hardware failures, software crashes, natural disasters (e.g., floods that damage/destroy hardware) and unexpected user responses<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup>.</p>
+<p>In both cases there&rsquo;s no ill intent, but that matters little if your critical data is gone.</p>
+<p>For risks such as these, one really needs to be thinking beyond the threats with parallels in traditional (physical) security. It really isn&rsquo;t just about &ldquo;who are the bad guys and how could they get me?&quot;, it&rsquo;s about &ldquo;how is my data at risk?&quot;.</p>
+<h1 id="philosophy">Philosophy</h1>
+<p>With these definitions and ideas in mind, I present my philosophy:</p>
+<blockquote>
+<p>Information Security should be considered a foundational aspect of the specification and design of systems managing data.</p>
+</blockquote>
+<p>This isn&rsquo;t revolutionary or outside the square, and I don&rsquo;t expect my view is unique, but I don&rsquo;t think it&rsquo;s the norm yet either.</p>
+<p>Also, I don&rsquo;t mean that every system should have two-factor authentication, signed certificates, redundant storage, 256-bit encrypted channels or any other particular security feature. Rather, when specifying or designing such a system, the properties defined and described above should be explicitly considered and appropriate questions asked. &ldquo;How is the information secured?&rdquo; should be as important a question as &ldquo;How much will this cost?&quot;.</p>
+<p>Addressing information security concerns is fundamentally an exercise in risk management and so, if helpful, the language and tools of risk management can be used to aid in the determination of how information will be secured. This can be especially helpful for those that don&rsquo;t have a background in information security (or information technology more generally) but are familiar with risk management (such as many in management roles).</p>
+<h1 id="takeaway">Takeaway</h1>
+<p>I&rsquo;ve taken a somewhat engineering- and slightly business-oriented approach to things here, but I firmly believe that these ideas are applicable to non-professionals too. I suggest that a person&rsquo;s family photos are as valuable to them as financial records are to a business, and quite possibly more valuable.</p>
+<p>To that end, I leave you with this:</p>
+<blockquote>
+<p>Any information that is of value to you is worth keeping secure.</p>
+</blockquote>
+<!-- FOOTNOTES -->
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>My general view with this sort of thing is roughly this: if you mess up your own stuff, <em>you</em> have to deal with the consequences. If you mess up someone else&rsquo;s stuff, <em>they</em> have to deal with the consequences, which I think is worse (i.e., having to clean up someone else&rsquo;s mess). <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>
+<a href="https://www.iso.org/standard/73906.html" target="_blank" rel="noopener">ISO/IEC 27000:2018 - Information technology &ndash; Security techniques &ndash; Information security management systems &ndash; Overview and vocabulary</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Or some other authorised user/process/agent. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>Google Photos allows users to make such a choice. See 
+<a href="https://support.google.com/photos/answer/6220791?co=GENIE.Platform%3DDesktop&amp;hl=en" target="_blank" rel="noopener">Choose the upload size of your photos and videos - Google Photos Help</a> <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>Even &ldquo;immediately&rdquo; can vary: for high-frequency traders, &ldquo;immediately&rdquo; can mean within microseconds of making a request, while for most people, waiting a few seconds to retrieve an email message is perfectly fine. <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>Though even this can vary, for example, between who can <em>read</em> the data and who can <em>modify</em> it. <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p>Though I&rsquo;d also suggest that too many people undervalue personal information that can be misused with regards to identity theft. <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p>It&rsquo;s not too uncommon to hear variations on &ldquo;why would anyone want to go after me?&quot;. <a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p>
+<a href="https://en.wikipedia.org/wiki/Botnet" target="_blank" rel="noopener">Botnet - Wikipedia</a> <a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:10" role="doc-endnote">
+<p>
+<a href="https://en.wikipedia.org/wiki/Ransomware" target="_blank" rel="noopener">Ransomware - Wikipedia</a> <a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:11" role="doc-endnote">
+<p>
+<a href="https://en.wiktionary.org/wiki/PEBCAK" target="_blank" rel="noopener">PEBCAK - Wiktionary</a> <a href="#fnref:11" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:12" role="doc-endnote">
+<p>For example, these 
+<a href="https://blog.envisionitsolutions.com/six-horror-stories-of-data-loss" target="_blank" rel="noopener">Six Horror Stories of Data Loss</a> <a href="#fnref:12" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:13" role="doc-endnote">
+<p>Such as Unintentional 
+<a href="https://en.wikipedia.org/wiki/Denial-of-service_attack#Unintentional_denial-of-service" target="_blank" rel="noopener">Denial-of-service attack - Wikipedia</a> <a href="#fnref:13" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/infosec/">infosec</a>
+  
+</div>
+
+
+
 <div class="share-box" aria-hidden="true">
   <ul class="share">
     
@@ -629,15 +933,6 @@
 </div>
 
 
-  
-
-</div>
-
-    
-
-
-
-
 
 
 
@@ -649,184 +944,7 @@
 
 
   
-</div>
-
-
-
-  <div class="article-container">
-
-    <div class="article-style">
-      
-
-<p>Information Security is something that interests me. I would argue that it should be of interest to <em>anyone</em> and <strong><em>everyone</em></strong> involved in managing or handling data, especially that of other people<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>, which pretty much means almost everyone working in software development or information technology more generally. It should also include anyone making choices about what software or systems they use to manage data, even if that&rsquo;s not part of their job description.</p>
-
-<p><a href="#takeaway">TLDR;</a></p>
-
-<h1 id="definitions">Definitions</h1>
-
-<p>As a first point, I should clarify what I mean by information security, as varying definitions exist. I tend to follow the definition provided in ISO/IEC 27000<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>:</p>
-
-<blockquote>
-<p>definition 3.28: preservation of <em>confidentiality</em>, <em>integrity</em> and <em>availability</em> of information</p>
-</blockquote>
-
-<p>As noted in the footnote to that definition, other properties, such as authenticity and reliability, can also be involved, though, for the moment at least, I will maintain focus on the three above.</p>
-
-<p>These properties will be relevant to all users of data, though the requirements can vary widely and this must be understood.</p>
-
-<h2 id="integrity">Integrity</h2>
-
-<blockquote>
-<p>definition 3.36: property of accuracy and completeness<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
-</blockquote>
-
-<p>Broadly speaking I consider data integrity to simply mean that the data is what you expect it to be, which generally means that, for a given piece of data, what you read tomorrow is what you<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup> wrote today.</p>
-
-<p>Almost all users will have about the same integrity requirements: they want the data they retrieve to be the data they saved. They do not want the data to be changed in unexpected ways, whether as a result of malicious action (e.g., &ldquo;hacking&rdquo;), user error (e.g., accidental deletion), or system failure (e.g., a hardware crash).</p>
-
-<p>That said, there may be some instances where this isn&rsquo;t strictly true. An example may be an image storage system whereby uploaded images are (re-)compressed in a lossy manner (e.g., JPEG compression) in order to reduce size (and hence, perhaps, allow the user to store more images).<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">4</a></sup> In this case, what the user later retrieves (the compressed image) is not exactly bit-for-bit the same as that which they sent for storage.</p>
-
-<h2 id="availability">Availability</h2>
-
-<blockquote>
-<p>definition 3.7: property of being accessible and usable on demand by an authorized entity<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
-</blockquote>
-
-<p>In simple terms, I consider this to mean that everyone that should have access to the data is able to get it in a timely manner.</p>
-
-<p>Availability requirements will differ: some users will want/need data immediately<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">5</a></sup>, some don&rsquo;t mind to wait. All want to get it eventually though.</p>
-
-<h2 id="confidentiality">Confidentiality</h2>
-
-<blockquote>
-<p>definition 3.10: property that information is not made available or disclosed to unauthorized individuals, entities, or
-processes<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
-</blockquote>
-
-<p>I consider this to mean that access to data &ndash; including, in some cases, mere knowledge of the <em>existence</em> of the data &ndash; can be restricted and controlled.</p>
-
-<p>Confidentiality requirements will differ: some don&rsquo;t care who has access<sup class="footnote-ref" id="fnref:6"><a href="#fn:6">6</a></sup>, some <em>want</em> all to access (e.g., someone in marketing may want as many people as possible to view their pitch), some want strict controls (few people want anyone but themselves and perhaps their bank to see their bank records).</p>
-
-<h2 id="authenticity">Authenticity</h2>
-
-<p>One of the &ldquo;other properties&rdquo; mentioned in the opening information security definition that I&rsquo;d like to expand on is authenticity.</p>
-
-<blockquote>
-<p>definition 3.6: property that an entity is what it claims to be<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
-</blockquote>
-
-<p>I like to think of this in terms of trust or provenance, that is, being able to trust, verify or confirm the stated source of data.</p>
-
-<p>As with all the other properties, requirements will vary. In some instances, as long as access-control mechanisms are in place (i.e., only authorised users have access), it may not matter which <em>specific</em> authorised user has modified data. In other cases (such as a hospital patient&rsquo;s medication requirements), knowing exactly which user made the changes &ndash; and possibly knowing the entire change history &ndash; is of critical importance.</p>
-
-<h1 id="lax-approach-hahahugoshortcode-s0-hbhb">Lax Approach <span class="subtle">(not the airport)</span></h1>
-
-<p>Too often, it seems, information security is an afterthought. It isn&rsquo;t often part of a user&rsquo;s core requirements (they want to use the data to do things that are important to them), though this is changing as more people become aware of what can happen when information is <em>not</em> secured. As a result of this lack of user pressure, the need to keep information secure can fall by the wayside (market pressures can mean it is sometimes difficult to justify spending resources investigating/developing features that the user won&rsquo;t explicitly demand).</p>
-
-<p>In many instances, I believe that information security is seen as non-critical because of the parallels drawn with physical security, e.g., physical locks and keys on doors. By and large, physical security mechanisms exist to protect physical resources from theft, damage or other such malicious acts. To prioritise security of this form essentially requires belief that a) one has resources worth protecting, and b) there exist malicious others that would try to gain access to those resources. In the world of information, I suggest that most people can evaluate the first point well enough<sup class="footnote-ref" id="fnref:7"><a href="#fn:7">7</a></sup>, but perhaps don&rsquo;t do so well with the second<sup class="footnote-ref" id="fnref:8"><a href="#fn:8">8</a></sup>.</p>
-
-<p>In the physical world, generally, the cost of attempting to gain access to restricted resources (e.g., research time, time to break open a lock and door, the risk and consequence of being caught and so-on) is relatively high, so it makes sense that attackers would tend to choose targets relatively carefully such that the potential gains outweigh the potential costs. In the information world, however, the cost of attempting access can be exceptionally low, approaching zero when considering the scale of attack provided by mechanisms like botnets<sup class="footnote-ref" id="fnref:9"><a href="#fn:9">9</a></sup> and when the global, cross-border nature of things means law enforcement is often powerless. In addition, as mechanisms such as ransomware<sup class="footnote-ref" id="fnref:10"><a href="#fn:10">10</a></sup> have demonstrated, modes of attack that aren&rsquo;t often seen in the physical world can become very attractive to attackers in the information world.</p>
-
-<p>The consequence is that resources that would not be targets for attackers in the physical world <em>are</em> targets in the information world. As a result, I think that questions that might be relevant in physical security, such as &ldquo;why would anyone want to steal my stuff?&rdquo; or &ldquo;who would go after me?&rdquo; are not so useful when considering information security, as the broad answers that present real threats can simply be &ldquo;because they can&rdquo; and &ldquo;anyone looking to make a quick buck&rdquo;.</p>
-
-<p>In short, to those without experience or interest in the area, the risks associated with poor information security are not generally as well understood or appreciated as those for physical security.</p>
-
-<h1 id="more-than-just-stopping-the-bad-guys">More Than Just Stopping The Bad Guys</h1>
-
-<p>In the section above I focussed on the notion of protecting information from those seeking to do harm of some sort (theft, extortion, etc.), but information security is about more that just that. There are many ways, beyond malice, in which the security of information can be compromised, and these should be considered even, and perhaps especially, in cases where protection against attack is not considered important (e.g., within an isolated/offline system).</p>
-
-<p>One source of compromise is plain old user error, or PICNIC<sup class="footnote-ref" id="fnref:11"><a href="#fn:11">11</a></sup> as it&rsquo;s sometimes known. I&rsquo;d hazard a guess that almost everyone (if not everyone) who has ever used a computer has at some stage accidentally deleted a file. Or worse<sup class="footnote-ref" id="fnref:12"><a href="#fn:12">12</a></sup>.</p>
-
-<p>A second set of sources are system faults. This broad category covers many things including hardware failures, software crashes, natural disasters (e.g., floods that damage/destroy hardware) and unexpected user responses<sup class="footnote-ref" id="fnref:13"><a href="#fn:13">13</a></sup>.</p>
-
-<p>In both cases there&rsquo;s no ill intent, but that matters little if your critical data is gone.</p>
-
-<p>For risks such as these, one really needs to be thinking beyond the threats with parallels in traditional (physical) security. It really isn&rsquo;t just about &ldquo;who are the bad guys and how could they get me?&rdquo;, it&rsquo;s about &ldquo;how is my data at risk?&rdquo;.</p>
-
-<h1 id="philosophy">Philosophy</h1>
-
-<p>With these definitions and ideas in mind, I present my philosophy:</p>
-
-<blockquote>
-<p>Information Security should be considered a foundational aspect of the specification and design of systems managing data.</p>
-</blockquote>
-
-<p>This isn&rsquo;t revolutionary or outside the square, and I don&rsquo;t expect my view is unique, but I don&rsquo;t think it&rsquo;s the norm yet either.</p>
-
-<p>Also, I don&rsquo;t mean that every system should have two-factor authentication, signed certificates, redundant storage, 256-bit encrypted channels or any other particular security feature. Rather, when specifying or designing such a system, the properties defined and described above should be explicitly considered and appropriate questions asked. &ldquo;How is the information secured?&rdquo; should be as important a question as &ldquo;How much will this cost?&rdquo;.</p>
-
-<p>Addressing information security concerns is fundamentally an exercise in risk management and so, if helpful, the language and tools of risk management can be used to aid in the determination of how information will be secured. This can be especially helpful for those that don&rsquo;t have a background in information security (or information technology more generally) but are familiar with risk management (such as many in management roles).</p>
-
-<h1 id="takeaway">Takeaway</h1>
-
-<p>I&rsquo;ve taken a somewhat engineering- and slightly business-oriented approach to things here, but I firmly believe that these ideas are applicable to non-professionals too. I suggest that a person&rsquo;s family photos are as valuable to them as financial records are to a business, and quite possibly more valuable.</p>
-
-<p>To that end, I leave you with this:</p>
-
-<blockquote>
-<p>Any information that is of value to you is worth keeping secure.</p>
-</blockquote>
-<div class="footnotes">
-
-<hr />
-
-<ol>
-<li id="fn:1">My general view with this sort of thing is roughly this: if you mess up your own stuff, <em>you</em> have to deal with the consequences. If you mess up someone else&rsquo;s stuff, <em>they</em> have to deal with the consequences, which I think is worse (i.e., having to clean up someone else&rsquo;s mess).
- <a class="footnote-return" href="#fnref:1"><sup>&uArr;</sup></a></li>
-<li id="fn:2"><a href="https://www.iso.org/standard/73906.html" target="_blank">ISO/IEC 27000:2018 - Information technology &ndash; Security techniques &ndash; Information security management systems &ndash; Overview and vocabulary</a>
- <a class="footnote-return" href="#fnref:2"><sup>&uArr;</sup></a></li>
-<li id="fn:3">Or some other authorised user/process/agent.
- <a class="footnote-return" href="#fnref:3"><sup>&uArr;</sup></a></li>
-<li id="fn:4">Google Photos allows users to make such a choice. See <a href="https://support.google.com/photos/answer/6220791?co=GENIE.Platform%3DDesktop&amp;hl=en" target="_blank">Choose the upload size of your photos and videos - Google Photos Help</a>
- <a class="footnote-return" href="#fnref:4"><sup>&uArr;</sup></a></li>
-<li id="fn:5">Even &ldquo;immediately&rdquo; can vary: for high-frequency traders, &ldquo;immediately&rdquo; can mean within microseconds of making a request, while for most people, waiting a few seconds to retrieve an email message is perfectly fine.
- <a class="footnote-return" href="#fnref:5"><sup>&uArr;</sup></a></li>
-<li id="fn:6">Though even this can vary, for example, between who can <em>read</em> the data and who can <em>modify</em> it.
- <a class="footnote-return" href="#fnref:6"><sup>&uArr;</sup></a></li>
-<li id="fn:7">Though I&rsquo;d also suggest that too many people undervalue personal information that can be misused with regards to identity theft.
- <a class="footnote-return" href="#fnref:7"><sup>&uArr;</sup></a></li>
-<li id="fn:8">It&rsquo;s not too uncommon to hear variations on &ldquo;why would anyone want to go after me?&rdquo;.
- <a class="footnote-return" href="#fnref:8"><sup>&uArr;</sup></a></li>
-<li id="fn:9"><a href="https://en.wikipedia.org/wiki/Botnet" target="_blank">Botnet - Wikipedia</a>
- <a class="footnote-return" href="#fnref:9"><sup>&uArr;</sup></a></li>
-<li id="fn:10"><a href="https://en.wikipedia.org/wiki/Ransomware" target="_blank">Ransomware - Wikipedia</a>
- <a class="footnote-return" href="#fnref:10"><sup>&uArr;</sup></a></li>
-<li id="fn:11"><a href="https://en.wiktionary.org/wiki/PEBCAK" target="_blank">PEBCAK - Wiktionary</a>
- <a class="footnote-return" href="#fnref:11"><sup>&uArr;</sup></a></li>
-<li id="fn:12">For example, these <a href="https://blog.envisionitsolutions.com/six-horror-stories-of-data-loss" target="_blank">Six Horror Stories of Data Loss</a>
- <a class="footnote-return" href="#fnref:12"><sup>&uArr;</sup></a></li>
-<li id="fn:13">Such as Unintentional <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack#Unintentional_denial-of-service" target="_blank">Denial-of-service attack - Wikipedia</a>
- <a class="footnote-return" href="#fnref:13"><sup>&uArr;</sup></a></li>
-</ol>
-</div>
-
-    </div>
-
-    
-
-
-    
-
-<div class="article-tags">
   
-  <a class="badge badge-light" href="/tags/infosec/">infosec</a>
-  
-</div>
-
-
-
-    
-      
-
-
-
-
-
-
-
-
-  
-
 
 
 
@@ -838,9 +956,10 @@ processes<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
     
   
   
-  <div class="media author-card">
+  
+  <div class="media author-card content-widget-hr">
     
-      <img class="portrait mr-3" src="https://s.gravatar.com/avatar/2a85dbf87db09b688e7f9c9449190b55?s=200')" alt="Avatar">
+      <img class="avatar mr-3 avatar-square" src="https://s.gravatar.com/avatar/2a85dbf87db09b688e7f9c9449190b55?s=200')" alt="Avatar">
     
 
     <div class="media-body">
@@ -848,130 +967,112 @@ processes<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
       <h6 class="card-subtitle">Engineer of (Software|Computer Systems|Electronics)<br><br>Digital Blacksmith</h6>
       <p class="card-text">My interests include automation, information security and artificial intelligence.</p>
       <ul class="network-icon" aria-hidden="true">
-        
-          
-          
-          
-            
-          
-          
-          
-          
-          
-            
-          
-          <li>
-            <a href="/#contact" >
-              <i class="fas fa-envelope-square"></i>
-            </a>
-          </li>
-        
-          
-          
-          
-            
-          
-          
-          
-          
-          
-            
-          
-          <li>
-            <a href="https://twitter.com/i_a_d_f" target="_blank" rel="noopener">
-              <i class="fab fa-twitter-square"></i>
-            </a>
-          </li>
-        
-          
-          
-          
-          
-          
-          
-          
-            
-          
-          <li>
-            <a href="https://scholar.google.com/citations?user=Yn0VXDcAAAAJ" target="_blank" rel="noopener">
-              <i class="ai ai-google-scholar"></i>
-            </a>
-          </li>
-        
-          
-          
-          
-            
-          
-          
-          
-          
-          
-            
-          
-          <li>
-            <a href="https://github.com/i-am-david-fernandez" target="_blank" rel="noopener">
-              <i class="fab fa-github-square"></i>
-            </a>
-          </li>
-        
-          
-          
-          
-            
-          
-          
-          
-          
-          
-            
-          
-          <li>
-            <a href="https://www.linkedin.com/in/david-fernandez-9b95718b/" target="_blank" rel="noopener">
-              <i class="fab fa-linkedin"></i>
-            </a>
-          </li>
-        
-      </ul>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope-square"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/i_a_d_f" target="_blank" rel="noopener">
+        <i class="fab fa-twitter-square"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=Yn0VXDcAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/i-am-david-fernandez" target="_blank" rel="noopener">
+        <i class="fab fa-github-square"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/david-fernandez-9b95718b/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
     </div>
   </div>
 
 
 
-      
-      
-    
 
-    
 
-    
+
+
 <section id="comments">
   
-    
-<div id="disqus_thread"></div>
-<script>
-  let disqus_config = function () {
-    
-    
-    
-  };
-  (function() {
-    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-      return;
-    }
-    var d = document, s = d.createElement('script'); s.async = true;
-    s.src = 'https://' + "i-am-david-fernandez-github-io" + '.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+
 
 
   
-</section>
+  
 
 
 
@@ -982,48 +1083,48 @@ processes<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
 
     
     
-
-    
-    
     
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
 
       
 
       
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
         
       
 
-      
-      
     
 
     
     
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
     
 
     
     
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script>const code_highlighting = true;</script>
     
 
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
     
     
     <script>
-      const search_index_filename = "/index.json";
-      const i18n = {
-        'placeholder': "Search...",
-        'results': "results found",
-        'no_results': "No results found"
-      };
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
       const content_type = {
         'post': "Posts",
         'project': "Projects",
@@ -1062,8 +1163,6 @@ processes<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
 
     
     
-    <script id="dsq-count-scr" src="https://i-am-david-fernandez-github-io.disqus.com/count.js" async></script>
-    
 
     
     
@@ -1079,7 +1178,7 @@ processes<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
     
     
     
-    <script src="/js/academic.min.f92d7215d2132cd354f657f0bc9cc542.js"></script>
+    <script src="/js/academic.min.c816d323c3a55093dae0829b44ea1ca8.js"></script>
 
     
 
@@ -1089,8 +1188,16 @@ processes<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
 
 
   
+  
   <div class="container">
     <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+  </p>
   
 
   <p class="powered-by">
@@ -1102,7 +1209,7 @@ processes<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup></p>
 
     
     <span class="float-right" aria-hidden="true">
-      <a href="#" id="back_to_top">
+      <a href="#" class="back-to-top">
         <span class="button_icon">
           <i class="fas fa-chevron-up fa-2x"></i>
         </span>
