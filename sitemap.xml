@@ -1,152 +1,119 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>/privacy/</loc>
-    <lastmod>2020-03-08T18:00:00+11:00</lastmod>
-  </url>
-  
-  <url>
+    <loc>/talk/example-talk/</loc>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/</loc>
-    <lastmod>2020-03-03T14:19:29+11:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/event/</loc>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/contact-response/</loc>
+    <lastmod>2020-03-08T18:00:00+11:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/post/</loc>
     <lastmod>2020-03-03T14:19:29+11:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/post/synchronising_a_virtual_machine_across_devices/</loc>
     <lastmod>2020-03-03T14:19:29+11:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/tags/</loc>
     <lastmod>2020-03-03T14:19:29+11:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/virtualisation/</loc>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/tag/virtualisation/</loc>
     <lastmod>2020-03-03T14:19:29+11:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/homelab/</loc>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/tag/homelab/</loc>
     <lastmod>2019-08-18T08:36:03+10:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/post/homelab/virtualisation_and_provisioning/</loc>
     <lastmod>2019-08-18T08:36:03+10:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/project/homelab/</loc>
     <lastmod>2019-08-14T15:23:15+10:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/project/</loc>
     <lastmod>2019-08-14T15:23:15+10:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/post/infosec/information-security-00/</loc>
     <lastmod>2019-08-13T15:15:58+10:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/infosec/</loc>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/tag/infosec/</loc>
     <lastmod>2019-08-13T15:15:58+10:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/tag/this-website/</loc>
+    <lastmod>2019-08-08T11:28:35+10:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/project/this_website/</loc>
     <lastmod>2019-08-08T11:28:35+10:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/this-website/</loc>
-    <lastmod>2019-08-08T11:28:35+10:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/post/this_website/post_number_one/</loc>
     <lastmod>2019-08-07T13:54:53+10:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication_types/1/</loc>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/slides/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/slides/example/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/publication-type/1/</loc>
     <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/</loc>
-    <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/d.-fernandez/</loc>
-    <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/publication/local-path-planning-along-bush-tracks-using-vision/</loc>
     <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/publication_types/</loc>
     <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/publication/</loc>
     <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/r.-a.-jarvis/</loc>
-    <lastmod>2007-12-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication_types/7/</loc>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/publication-type/7/</loc>
     <lastmod>2007-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/publication/visual-navigation-on-rough-tracks-in-bush-environments/</loc>
     <lastmod>2007-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/a.-price/</loc>
-    <lastmod>2005-07-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/publication/visual-detection-and-tracking-of-poorly-structured-dirt-roads/</loc>
     <lastmod>2005-07-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/publication/visual-odometry-for-an-outdoor-mobile-robot/</loc>
     <lastmod>2004-12-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/admin/</loc>
-  </url>
-  
-  <url>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>/admin/</loc>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>/categories/</loc>
+    <changefreq>weekly</changefreq>
   </url>
-  
-  <url>
-    <loc>/talk/</loc>
-  </url>
-  
 </urlset>

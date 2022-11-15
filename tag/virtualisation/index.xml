@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>virtualisation | i.am.david.fernandez</title>
+    <link>/tag/virtualisation/</link>
+      <atom:link href="/tag/virtualisation/index.xml" rel="self" type="application/rss+xml" />
+    <description>virtualisation</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 03 Mar 2020 14:19:29 +1100</lastBuildDate>
+    <image>
+      <url>/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <title>virtualisation</title>
+      <link>/tag/virtualisation/</link>
+    </image>
+    
+    <item>
+      <title>Synchronising a Virtual Machine Across Devices</title>
+      <link>/post/synchronising_a_virtual_machine_across_devices/</link>
+      <pubDate>Tue, 03 Mar 2020 14:19:29 +1100</pubDate>
+      <guid>/post/synchronising_a_virtual_machine_across_devices/</guid>
+      <description>&lt;p&gt;I have a need to use a single virtual machine on two devices, in particular a laptop and a desktop machine. My requirements/constraints for use are as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Both devices run Windows 10, so the solution must work in this environment.&lt;/li&gt;
+&lt;li&gt;I do &lt;em&gt;not&lt;/em&gt; need to work on both devices simultaneously.&lt;/li&gt;
+&lt;li&gt;I will generally only use one device on any given day (i.e., will switch devices at most once per day).&lt;/li&gt;
+&lt;li&gt;I do not wish for complications or performance hits &lt;em&gt;within&lt;/em&gt; work sessions.&lt;/li&gt;
+&lt;li&gt;I don&amp;rsquo;t mind some up-front complications.&lt;/li&gt;
+&lt;li&gt;I don&amp;rsquo;t mind some performance hits (e.g., extra time) &lt;em&gt;between&lt;/em&gt; work sessions.&lt;/li&gt;
+&lt;li&gt;I almost exclusively use &lt;a href=&#34;https://www.vagrantup.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant by HashiCorp&lt;/a&gt; to manage my virtual machines, and &lt;a href=&#34;https://www.virtualbox.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VirtualBox by Oracle&lt;/a&gt; as the hypervisor, so my solution must work with these tools.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Broadly, this rules out solutions like working from an external drive (I don&amp;rsquo;t, for example, want to need to drag the drive around with me if I need to move the laptop to another area for a short time), but allows for a solution that requires data to be copied between devices when switching devices.&lt;/p&gt;
+&lt;p&gt;The process I&amp;rsquo;ve engineered to achieve this is initially convoluted, but it seems to work. The complications are primarily during initial setup; thereafter there&amp;rsquo;s not much to do beyond copy/sync files, and for that I&amp;rsquo;ve found &lt;a href=&#34;https://freefilesync.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FreeFileSync&lt;/a&gt; to be very useful.&lt;/p&gt;
+&lt;h1 id=&#34;setupinitialisation&#34;&gt;Setup/Initialisation&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Ensure the box is explicitly given a name, such that it will be identical on all devices within &lt;code&gt;VirtualBox&lt;/code&gt;, i.e., within the &lt;code&gt;Vagrantfile&lt;/code&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;config&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vm&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;provider&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;virtualbox&amp;#34;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vb&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;vb&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;machine-name&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Ensure the &lt;em&gt;exact&lt;/em&gt; same &lt;code&gt;VirtualBox&lt;/code&gt; path is used on both machines.
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;In my use, the laptop and desktop are quite differently configured. In particular, the laptop has a single drive and working partition (the ubiquitous &lt;code&gt;C:&lt;/code&gt;) while the desktop has a multitude of drives and partitions, with my virtual machines residing on &lt;code&gt;F:&lt;/code&gt;. To allow the same path to be used on both machines, I use a drive-mapped folder (see &lt;a href=&#34;https://www.raymond.cc/blog/map-folder-or-directory-to-drive-letter-for-quick-and-easy-access/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Map a Folder to a Drive Letter for Quick and Easy Access • Raymond.CC&lt;/a&gt;), using the same drive on both devices but different mapped folders. e.g.:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Desktop: &lt;code&gt;V:&lt;/code&gt; &amp;ndash;&amp;gt; &lt;code&gt;\??\F:\davidfernandez\Virtualisation\Machines\VirtualBox&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Laptop: &lt;code&gt;V:&lt;/code&gt; &amp;ndash;&amp;gt; &lt;code&gt;\??\C:\Users\davidfernandez\Virtualisation\Machines\VirtualBox&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I use the registry-based method described in the article linked above, so an appropriate &lt;code&gt;.reg&lt;/code&gt; file for the desktop would be:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-registry&#34; data-lang=&#34;registry&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Windows Registry Editor Version 5.00
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;HKEY_LOCAL_MACHINE&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;&amp;#34;V:&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;\\??\\F:\\davidfernandez\\Virtualisation\\Machines\\VirtualBox&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;On &lt;code&gt;Device A&lt;/code&gt;, create the box via &lt;code&gt;vagrant up&lt;/code&gt;.
+&lt;ol&gt;
+&lt;li&gt;If using the folder mapping trick (above), change &lt;code&gt;VirtualBox&lt;/code&gt;&amp;rsquo;s machine folder before creating the machine:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;VBoxManage.exe setproperty machinefolder V:&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Remember to reset/revert this afterwards.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Perform provisioning steps on &lt;code&gt;Device A&lt;/code&gt; as required.&lt;/li&gt;
+&lt;li&gt;On &lt;code&gt;Device B&lt;/code&gt;, create the box via &lt;code&gt;vagrant up&lt;/code&gt;, but (for efficiency) do not provision.
+&lt;ol&gt;
+&lt;li&gt;Again, if using folder mapping, change &lt;code&gt;VirtualBox&lt;/code&gt;&amp;rsquo;s machine folder before creating the machine.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Transfer material from &lt;code&gt;Device A&lt;/code&gt; to &lt;code&gt;Device B&lt;/code&gt;:
+&lt;ol&gt;
+&lt;li&gt;All &lt;code&gt;VirtualBox&lt;/code&gt; files (e.g., &lt;code&gt;*.vbox&lt;/code&gt;, &lt;code&gt;*.vmdk&lt;/code&gt; etc.)&lt;/li&gt;
+&lt;li&gt;All &lt;code&gt;.vagrant/machines/&amp;lt;machine-name&amp;gt;&lt;/code&gt; files &lt;em&gt;except&lt;/em&gt;:
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;.vagrant/machines/&amp;lt;machine-name&amp;gt;/virtualbox/synced_folders&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.vagrant/machines/&amp;lt;machine-name&amp;gt;/virtualbox/vagrant_cwd&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;These files contain device-specific paths (the host location of shared folders and the host location of the &lt;code&gt;Vagrant&lt;/code&gt; project) and are best left matched to the device.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;On &lt;code&gt;Device B&lt;/code&gt;:
+&lt;ol&gt;
+&lt;li&gt;Replace the &lt;code&gt;uuid&lt;/code&gt; value for the &lt;code&gt;MachineRegistry/MachineEntry&lt;/code&gt; entry for the box in &lt;code&gt;~/.VirtualBox/VirtualBox.xml&lt;/code&gt; to match the value in the corresponding file on &lt;code&gt;Device A&lt;/code&gt;. In other words, this XML element should be the same on both device&amp;rsquo;s configuration, with the existing &lt;code&gt;uuid&lt;/code&gt; on &lt;code&gt;Device A&lt;/code&gt; use in both:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;MachineEntry&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;uuid=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;{4b62d0e5-cf93-48de-8be2-460562b87fbf}&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;V:\&amp;lt;machine-name&amp;gt;\&amp;lt;machine-name&amp;gt;.vbox&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;p&gt;This seems to break &lt;code&gt;vagrant&lt;/code&gt;&amp;rsquo;s ability to connect via ssh (i.e., specifically &lt;code&gt;vagrant ssh&lt;/code&gt; fails, seeming due to a bad keypair). However, as I don&amp;rsquo;t use &lt;code&gt;vagrant&lt;/code&gt;&amp;rsquo;s ssh capabilities (that is, I connect via ssh using other tools), this doesn&amp;rsquo;t bother me and I have not spent time trying to resolve this. If you know what might be causing this specifically, and/or know a solution, let me know so I can update this post.&lt;/p&gt;
+&lt;h1 id=&#34;ongoing-sync&#34;&gt;Ongoing Sync&lt;/h1&gt;
+&lt;p&gt;Thereafter, it should be sufficient to simply synchronise the files listed in step 6 above.&lt;/p&gt;
+&lt;p&gt;To improve efficiency of syncing, I find it useful to use snapshots. Without this, synchronising means (possibly&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;) transferring &lt;em&gt;all&lt;/em&gt; virtual disk files/data. Using snapshots means you only transfer the virtual disks changed after the most recent snapshot.&lt;/p&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;The setup steps for this arrangement are a bit fiddly, but only need to be done once (per machine you wish to synchronise). Thereafter, maintaining synchronicity is quite straightforward. I&amp;rsquo;ve been using this setup for a while now, and, other than the non-working &lt;code&gt;vagrant&lt;/code&gt;-based ssh, everything works as expected. Hopefully this setup can be of use to you.&lt;/p&gt;
+&lt;!-- FOOTNOTES --&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;Depending on how smart your synchronisation tool is. Some tools, like &lt;a href=&#34;https://rsync.samba.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rsync&lt;/a&gt;, will only transfer the parts/chunks of files that are different, and therefore are much more efficient than those that transfer the entire content of files that are different.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Virtualisation and Provisioning</title>
+      <link>/post/homelab/virtualisation_and_provisioning/</link>
+      <pubDate>Sun, 18 Aug 2019 08:36:03 +1000</pubDate>
+      <guid>/post/homelab/virtualisation_and_provisioning/</guid>
+      <description>&lt;p&gt;This post describes the broad approach I have taken to setting-up and configuring the software system of my current primary home server (&lt;code&gt;Mammoth&lt;/code&gt;). Much of this might seem overkill for a home lab, but part of the point of having a home lab is having a place and projects in and with which I can practice, refine and extend my skills and knowledge in areas that might otherwise be considered the domain of a &amp;ldquo;professional&amp;rdquo;, of some sort&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;I won&amp;rsquo;t be presenting any code or code-like material here (that may come in subsequent posts), but will instead focus on my choice of tooling and methods. Also, note that this isn&amp;rsquo;t a tutorial on how to use any of these tools &amp;ndash; your favourite search engine will find those for you &amp;ndash; but rather a higher-level picture of how these different tools can be used together to solve a larger problem.&lt;/p&gt;
+&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;In general, I&amp;rsquo;m not a big fan of ad-hoc management of systems (e.g., servers) that handle anything remotely important. I like to automate (which then becomes documentation of sorts) and version-control. This aids greatly in problem-solving (if something goes wrong, the automation side can tell you exactly what was done, the revision control can let you go back to a working state) and repeatability (you might not ever need an exact duplicate of a system, but in my experience there are very often shared subsets).&lt;/p&gt;
+&lt;p&gt;I do, however, like the ability to experiment and play before settling on a solution, especially when I&amp;rsquo;m working with something new and unfamiliar. Having a way to try something, knowing you can either undo what you&amp;rsquo;ve done if you&amp;rsquo;re not happy, or be able to exactly replicate if you are, is invaluable.&lt;/p&gt;
+&lt;p&gt;To achieve this, I make use of virtualisation technologies and automated provisioning systems.&lt;/p&gt;
+&lt;h2 id=&#34;virtualisation&#34;&gt;Virtualisation&lt;/h2&gt;
+&lt;p&gt;Virtualisation is used to provide what is essentially a simulated&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; copy of the real environment. Within this environment, you can freely change things without worrying about messing up an otherwise functioning system. Using features like snapshotting, you can also create &amp;ldquo;known good&amp;rdquo; bookmarks of the system, that is, complete copies of the system state, to which you can return if and when required. In this manner, you can develop iteratively and progressively:&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;graph TB;
+
+A(Base System)
+B[Create Snapshot]
+C[Revert Snapshot]
+D(Snapshot)
+E[Modify]
+F{Happy?}
+G{Complete?}
+H(Done!)
+
+A --&gt; B
+B --&gt; D
+C --&gt; D
+D --&gt; E
+E --&gt; F
+F -- no --&gt; C
+F -- yes --&gt; G
+G -- no --&gt; B
+G -- yes --&gt; H
+&lt;/div&gt;
+&lt;p&gt;You essentially develop within a loop, starting with a known-good snapshot (which is initially created from whatever your starting point is), making changes, and either creating a new snapshot (if you&amp;rsquo;re happy with the changes) or reverting to the prior snapshot state (undoing) if you&amp;rsquo;re not happy. Rinse and repeat until your snapshot is your desired end state.&lt;/p&gt;
+&lt;p&gt;Because the system is virtual, and the snapshots are &lt;em&gt;complete&lt;/em&gt; system states, you can afford to be as aggressive in your experimenting as you like. Completely messed up the (virtual) partition table? Meh. Revert.&lt;/p&gt;
+&lt;p&gt;An important caveat to this is that a virtual system will only be an approximation of the real system in terms of hardware. For many use-cases, perhaps most, this will be close enough. Limiting the available resources (disk space, RAM, CPU) within the virtual machine to match the real system can be plenty good enough (e.g., can let you know if you&amp;rsquo;re pushing the system beyond what the real machine could handle). If, however, your system involves some particular hardware (not just that the system &lt;em&gt;has&lt;/em&gt; some particular hardware, but that your use of it &lt;em&gt;requires&lt;/em&gt; that particular hardware), then the virtual machine may not suffice.&lt;/p&gt;
+&lt;p&gt;To reiterate, virtualisation provides a controlled and reproduceable environment and context for development and experimentation.&lt;/p&gt;
+&lt;h2 id=&#34;automated-provisioning&#34;&gt;Automated Provisioning&lt;/h2&gt;
+&lt;p&gt;Automated provisioning is the process of using programmable tools to perform a variety of system setup operations, largely installing and configuring software packages. The notion of programmable tools here means you programatically define &amp;ndash; whether by scripts, &amp;ldquo;recipes&amp;rdquo;, or some form of configuration file &amp;ndash; what the tool should do. For example, to create a set of users, you might define a list of user specifications (each comprising a username, initial password and e-mail address) and specify that a &amp;ldquo;new user&amp;rdquo; operation be performed for each member of that list.&lt;/p&gt;
+&lt;p&gt;In this manner, the system is provisioned &amp;ndash; e.g., users are created &amp;ndash; according to a program that can be applied consistently. There is no need to remember the details of each user, nor the process of creating them. Especially when combined with a staging environment&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; such as the virtual machine described above, this method and mechanisms can provide a high degree of reliability and quality assurance, as the programmatic nature removes a key source of problems: human error&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;The automated provisioning process becomes the work performed in the &amp;ldquo;Modify&amp;rdquo; block in the diagram above.&lt;/p&gt;
+&lt;h1 id=&#34;thats-how-i-role&#34;&gt;That&amp;rsquo;s How I Role&lt;/h1&gt;
+&lt;p&gt;Having provided a broad, non-specific overview , I&amp;rsquo;ll now describe some of the details of my preferred approach.&lt;/p&gt;
+&lt;p&gt;It is also important to note that other solution exist. In particular, the tools I present here are those I&amp;rsquo;ve come to know and love. I find them to be very good at their jobs and very happily recommend them, both individually and in combination, but it can&amp;rsquo;t hurt for you to explore alternatives and find things that suit &lt;em&gt;you&lt;/em&gt;. The best tools are the ones &lt;em&gt;you&lt;/em&gt; can use productively, and the reality is that often means the ones you &lt;em&gt;like&lt;/em&gt; and not necessarily the ones that are technically superior. Find tools you&amp;rsquo;re happy to use, and spend time becoming proficient and productive with them.&lt;/p&gt;
+&lt;h1 id=&#34;virtualisation-hahahugoshortcode-s0-hbhb&#34;&gt;Virtualisation &lt;span class=&#34;subtle&#34;&gt;(again)&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;There exist a variety of virtualisation tools that sit at different levels in the virtualisation hierarchy, with the software used to create and run virtual machines often referred to as a hypervisor. I won&amp;rsquo;t attempt to describe or define them here; places such as Wikipedia&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; do a much better job. My long-term hypervisor preference is &lt;a href=&#34;https://www.virtualbox.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VirtualBox by Oracle&lt;/a&gt;. It works well on the host systems that interest me (Windows and Linux on x86 hardware) and can run virtual machines with the guest systems that interest me (again, Windows and Linux on x86 virtualised hardware). Also, it is free and open-source&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;, which appeals to me.&lt;/p&gt;
+&lt;p&gt;My general preference regarding virtual machines is to manage them via &lt;a href=&#34;https://www.vagrantup.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant by HashiCorp&lt;/a&gt;. Primarily, Vagrant is a tool to aid reproducability. It provides a means for defining, building and controlling virtual machines, sitting a level above the hypervisor. Among other things, it abstracts most areas of virtual machine creation and management such that dependence on a specific hypervisor is reduced&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;. A machine is defined via a configuration file that allows you to specify things like a base machine (e.g., a bare Ubuntu 18.04 installation) and resource tweaks (e.g., the amount of RAM, CPUs and such). This makes it very suitable for revision control (that is, the configuration can be placed under revision control), further aiding reproducibility.&lt;/p&gt;
+&lt;p&gt;In some cases, such as with &lt;code&gt;Mammoth&lt;/code&gt;, a suitable base machine does not exist. Specifically, &lt;code&gt;Mammoth&lt;/code&gt; uses a specific partitioning/filesystem layout that is not common enough for someone else to have created a matching base machine. This is where &lt;a href=&#34;https://www.packer.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Packer by HashiCorp&lt;/a&gt; comes in. Packer is a tool for creating virtual machines from scratch. Whereas Vagrant requires an existing base machine (typically a minimally-configured machine with little more than a bare OS having been installed), Packer automates the process one would use to create that base machine (i.e., defining the base machine specs, such as RAM and disks, and automating OS installation and setup).&lt;/p&gt;
+&lt;p&gt;Neither Packer nor Vagrant are tied to any particular virtual machine manager (such as VirtualBox).&lt;/p&gt;
+&lt;p&gt;Step one, therefore, is to use Packer to create a base machine that resembles the real &lt;code&gt;Mammoth&lt;/code&gt; as closely as possible. &lt;code&gt;Mammoth&lt;/code&gt; uses the latest (&lt;code&gt;18.04&lt;/code&gt; at the time of its creation) long-term-support release of &lt;code&gt;Ubuntu&lt;/code&gt; (server variant). To avoid reinventing the wheel, the &lt;a href=&#34;http://chef.github.io/bento/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bento&lt;/a&gt; project was used as a starting point, removing things that weren&amp;rsquo;t needed (e.g., retaining only the &lt;code&gt;ubuntu-18.04-amd64&lt;/code&gt; template) and modifying to suit (e.g., specifying primary drive partitions and filesystems).&lt;/p&gt;
+&lt;p&gt;As a side note, I have had much success with Bento boxes, and highly recommend them for general use. Many of their boxes are available for direct use with Vagrant (i.e., without needing to build with Packer) at &lt;a href=&#34;https://app.vagrantup.com/bento&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant Cloud&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With this base machine in place, Vagrant (and VirtualBox) can then be used to create and run working virtual machines.&lt;/p&gt;
+&lt;h1 id=&#34;automated-provisioning-hahahugoshortcode-s1-hbhb&#34;&gt;Automated Provisioning &lt;span class=&#34;subtle&#34;&gt;(again)&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;As with virtualisation, there are a variety of methods and tools to achieve automated provisioning, from freeform scripting through to dedicated tools. As you might guess, I like dedicated tools, and in particular, I like and use &lt;a href=&#34;https://www.ansible.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ansible by Red Hat&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;One of the primary reasons I prefer Ansible is its minimal requirements on both the control node (the machine doing the provisioning) and on managed nodes (the machines being provisioned). In the common case of provisioning a Linux machine, you simply need an SSH server and Python on the managed node&lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;, and Python on the controller&lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;. Ansible does not use or require a server/long-running process (beyond SSH) to run on the managed node (unlike a number of alternative tools), which is good for security (e.g., no additional ports to keep open or processes to keep secure) and resource use (e.g., no RAM or CPU time used by a process that is rarely used).&lt;/p&gt;
+&lt;p&gt;I try to follow Ansible guidelines and best-practices as best as possible, which includes separating host specifications (&amp;ldquo;staging&amp;rdquo; points the the virtual machine, &amp;ldquo;production&amp;rdquo; points to the real machine), using playbooks for middle-management, and using roles to do the heavy lifting.&lt;/p&gt;
+&lt;p&gt;Using roles allows you to avoid reinventing the wheel as much as possible, either by making use of someone else&amp;rsquo;s role definitions (such as those available on &lt;a href=&#34;https://galaxy.ansible.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ansible Galaxy&lt;/a&gt;), or by creating something that you yourself can reuse on other projects (or publish if desired).&lt;/p&gt;
+&lt;p&gt;I like to break provisioning up into sequential stages, with each stage corresponding to one iteration of the &amp;ldquo;snapshot -&amp;gt; change -&amp;gt; snapshot&amp;rdquo; loop described earlier. In this way, reverting to a snapshot during development means reverting to the result of running a particular sequence of playbooks/stages. I also like to keep stages short and logically coherent, such that they themselves may be reused on other projects.&lt;/p&gt;
+&lt;!-- FOOTNOTES --&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;And indeed, most of the things I describe here I learnt working as a software engineer.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;I&amp;rsquo;m trying to give a description of things that is meaningful to a broad audience, not provide strictly-correct definitions.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;With this sort of development work we often work in terms of different stages or environments: the production environment is the live, &amp;ldquo;real&amp;rdquo; system, the staging environment is as close an analogue as we can get to production where we perform final tests before applying changes to production, and the &amp;ldquo;development&amp;rdquo; environment is that in which most development work takes place before testing in &amp;ldquo;staging&amp;rdquo;.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;
+&lt;p&gt;Assuming one has effectively used the staging environment to develop and test the programs to iron out wrinkles.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34;&gt;
+&lt;p&gt;See, for example, &lt;a href=&#34;https://en.wikipedia.org/wiki/Virtualization&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Virtualization - Wikipedia&lt;/a&gt; and &lt;a href=&#34;https://en.wikipedia.org/wiki/Hypervisor&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hypervisor - Wikipedia&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34;&gt;
+&lt;p&gt;Except the extension pack, which is not open-source and, broadly speaking, is free for personal use but non-free for commercial user. See &lt;a href=&#34;https://www.virtualbox.org/wiki/Licensing_FAQ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Licensing_FAQ – Oracle VM VirtualBox&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34;&gt;
+&lt;p&gt;There are still some aspects of machine definition that depend on the specific hypervisor being used.&amp;#160;&lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:8&#34;&gt;
+&lt;p&gt;Which covers most if not all modern Linux distributions, including the default for Raspberry Pi machines.&amp;#160;&lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:9&#34;&gt;
+&lt;p&gt;Officially, Windows isn&amp;rsquo;t supported as a controller, though &lt;a href=&#34;https://docs.microsoft.com/en-us/windows/wsl/faq&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Windows Subsystem for Linux&lt;/a&gt; overcomes this limitation and is the way I use Ansible.&amp;#160;&lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,9 +5,9 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 03 Mar 2020 14:19:29 +1100</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 03 Mar 2020 14:19:29 +1100</lastBuildDate>
     <image>
-      <url>img/map[gravatar:%!s(bool=true) shape:square]</url>
+      <url>/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
@@ -25,26 +25,21 @@
 &lt;li&gt;I do not wish for complications or performance hits &lt;em&gt;within&lt;/em&gt; work sessions.&lt;/li&gt;
 &lt;li&gt;I don&amp;rsquo;t mind some up-front complications.&lt;/li&gt;
 &lt;li&gt;I don&amp;rsquo;t mind some performance hits (e.g., extra time) &lt;em&gt;between&lt;/em&gt; work sessions.&lt;/li&gt;
-&lt;li&gt;I almost exclusively use 
-&lt;a href=&#34;https://www.vagrantup.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant by HashiCorp&lt;/a&gt; to manage my virtual machines, and 
-&lt;a href=&#34;https://www.virtualbox.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VirtualBox by Oracle&lt;/a&gt; as the hypervisor, so my solution must work with these tools.&lt;/li&gt;
+&lt;li&gt;I almost exclusively use &lt;a href=&#34;https://www.vagrantup.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant by HashiCorp&lt;/a&gt; to manage my virtual machines, and &lt;a href=&#34;https://www.virtualbox.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VirtualBox by Oracle&lt;/a&gt; as the hypervisor, so my solution must work with these tools.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Broadly, this rules out solutions like working from an external drive (I don&amp;rsquo;t, for example, want to need to drag the drive around with me if I need to move the laptop to another area for a short time), but allows for a solution that requires data to be copied between devices when switching devices.&lt;/p&gt;
-&lt;p&gt;The process I&amp;rsquo;ve engineered to achieve this is initially convoluted, but it seems to work. The complications are primarily during initial setup; thereafter there&amp;rsquo;s not much to do beyond copy/sync files, and for that I&amp;rsquo;ve found 
-&lt;a href=&#34;https://freefilesync.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FreeFileSync&lt;/a&gt; to be very useful.&lt;/p&gt;
+&lt;p&gt;The process I&amp;rsquo;ve engineered to achieve this is initially convoluted, but it seems to work. The complications are primarily during initial setup; thereafter there&amp;rsquo;s not much to do beyond copy/sync files, and for that I&amp;rsquo;ve found &lt;a href=&#34;https://freefilesync.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FreeFileSync&lt;/a&gt; to be very useful.&lt;/p&gt;
 &lt;h1 id=&#34;setupinitialisation&#34;&gt;Setup/Initialisation&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;Ensure the box is explicitly given a name, such that it will be identical on all devices within &lt;code&gt;VirtualBox&lt;/code&gt;, i.e., within the &lt;code&gt;Vagrantfile&lt;/code&gt;:&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;  config.vm.provider &amp;quot;virtualbox&amp;quot; do |vb|
-    vb.name = &amp;quot;&amp;lt;machine-name&amp;gt;&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;2&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;config&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vm&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;provider&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;virtualbox&amp;#34;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vb&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;vb&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;machine-name&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;Ensure the &lt;em&gt;exact&lt;/em&gt; same &lt;code&gt;VirtualBox&lt;/code&gt; path is used on both machines.
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;In my use, the laptop and desktop are quite differently configured. In particular, the laptop has a single drive and working partition (the ubiquitous &lt;code&gt;C:&lt;/code&gt;) while the desktop has a multitude of drives and partitions, with my virtual machines residing on &lt;code&gt;F:&lt;/code&gt;. To allow the same path to be used on both machines, I use a drive-mapped folder (see 
-&lt;a href=&#34;https://www.raymond.cc/blog/map-folder-or-directory-to-drive-letter-for-quick-and-easy-access/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Map a Folder to a Drive Letter for Quick and Easy Access • Raymond.CC&lt;/a&gt;), using the same drive on both devices but different mapped folders. e.g.:&lt;/p&gt;
+&lt;p&gt;In my use, the laptop and desktop are quite differently configured. In particular, the laptop has a single drive and working partition (the ubiquitous &lt;code&gt;C:&lt;/code&gt;) while the desktop has a multitude of drives and partitions, with my virtual machines residing on &lt;code&gt;F:&lt;/code&gt;. To allow the same path to be used on both machines, I use a drive-mapped folder (see &lt;a href=&#34;https://www.raymond.cc/blog/map-folder-or-directory-to-drive-letter-for-quick-and-easy-access/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Map a Folder to a Drive Letter for Quick and Easy Access • Raymond.CC&lt;/a&gt;), using the same drive on both devices but different mapped folders. e.g.:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Desktop: &lt;code&gt;V:&lt;/code&gt; &amp;ndash;&amp;gt; &lt;code&gt;\??\F:\davidfernandez\Virtualisation\Machines\VirtualBox&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Laptop: &lt;code&gt;V:&lt;/code&gt; &amp;ndash;&amp;gt; &lt;code&gt;\??\C:\Users\davidfernandez\Virtualisation\Machines\VirtualBox&lt;/code&gt;&lt;/li&gt;
@@ -56,15 +51,14 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre&gt;&lt;code class=&#34;language-registry&#34;&gt;Windows Registry Editor Version 5.00
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices]
-&amp;quot;V:&amp;quot;=&amp;quot;\\??\\F:\\davidfernandez\\Virtualisation\\Machines\\VirtualBox&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;3&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-registry&#34; data-lang=&#34;registry&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Windows Registry Editor Version 5.00
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;HKEY_LOCAL_MACHINE&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;&amp;#34;V:&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;\\??\\F:\\davidfernandez\\Virtualisation\\Machines\\VirtualBox&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;On &lt;code&gt;Device A&lt;/code&gt;, create the box via &lt;code&gt;vagrant up&lt;/code&gt;.
 &lt;ol&gt;
-&lt;li&gt;If using the folder mapping trick (above), change &lt;code&gt;VirtualBox&lt;/code&gt;&#39;s machine folder before creating the machine:
+&lt;li&gt;If using the folder mapping trick (above), change &lt;code&gt;VirtualBox&lt;/code&gt;&amp;rsquo;s machine folder before creating the machine:
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;VBoxManage.exe setproperty machinefolder V:&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -75,7 +69,7 @@
 &lt;li&gt;Perform provisioning steps on &lt;code&gt;Device A&lt;/code&gt; as required.&lt;/li&gt;
 &lt;li&gt;On &lt;code&gt;Device B&lt;/code&gt;, create the box via &lt;code&gt;vagrant up&lt;/code&gt;, but (for efficiency) do not provision.
 &lt;ol&gt;
-&lt;li&gt;Again, if using folder mapping, change &lt;code&gt;VirtualBox&lt;/code&gt;&#39;s machine folder before creating the machine.&lt;/li&gt;
+&lt;li&gt;Again, if using folder mapping, change &lt;code&gt;VirtualBox&lt;/code&gt;&amp;rsquo;s machine folder before creating the machine.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;Transfer material from &lt;code&gt;Device A&lt;/code&gt; to &lt;code&gt;Device B&lt;/code&gt;:
@@ -98,25 +92,23 @@
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;MachineEntry uuid=&amp;quot;{4b62d0e5-cf93-48de-8be2-460562b87fbf}&amp;quot; src=&amp;quot;V:\&amp;lt;machine-name&amp;gt;\&amp;lt;machine-name&amp;gt;.vbox&amp;quot;/&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
-&lt;p&gt;This seems to break &lt;code&gt;vagrant&lt;/code&gt;&#39;s ability to connect via ssh (i.e., specifically &lt;code&gt;vagrant ssh&lt;/code&gt; fails, seeming due to a bad keypair). However, as I don&amp;rsquo;t use &lt;code&gt;vagrant&lt;/code&gt;&#39;s ssh capabilities (that is, I connect via ssh using other tools), this doesn&amp;rsquo;t bother me and I have not spent time trying to resolve this. If you know what might be causing this specifically, and/or know a solution, let me know so I can update this post.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;MachineEntry&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;uuid=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;{4b62d0e5-cf93-48de-8be2-460562b87fbf}&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;V:\&amp;lt;machine-name&amp;gt;\&amp;lt;machine-name&amp;gt;.vbox&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;p&gt;This seems to break &lt;code&gt;vagrant&lt;/code&gt;&amp;rsquo;s ability to connect via ssh (i.e., specifically &lt;code&gt;vagrant ssh&lt;/code&gt; fails, seeming due to a bad keypair). However, as I don&amp;rsquo;t use &lt;code&gt;vagrant&lt;/code&gt;&amp;rsquo;s ssh capabilities (that is, I connect via ssh using other tools), this doesn&amp;rsquo;t bother me and I have not spent time trying to resolve this. If you know what might be causing this specifically, and/or know a solution, let me know so I can update this post.&lt;/p&gt;
 &lt;h1 id=&#34;ongoing-sync&#34;&gt;Ongoing Sync&lt;/h1&gt;
 &lt;p&gt;Thereafter, it should be sufficient to simply synchronise the files listed in step 6 above.&lt;/p&gt;
 &lt;p&gt;To improve efficiency of syncing, I find it useful to use snapshots. Without this, synchronising means (possibly&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;) transferring &lt;em&gt;all&lt;/em&gt; virtual disk files/data. Using snapshots means you only transfer the virtual disks changed after the most recent snapshot.&lt;/p&gt;
 &lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;The setup steps for this arrangement are a bit fiddly, but only need to be done once (per machine you wish to synchronise). Thereafter, maintaining synchronicity is quite straightforward. I&amp;rsquo;ve been using this setup for a while now, and, other than the non-working &lt;code&gt;vagrant&lt;/code&gt;-based ssh, everything works as expected. Hopefully this setup can be of use to you.&lt;/p&gt;
 &lt;!-- FOOTNOTES --&gt;
-&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Depending on how smart your synchronisation tool is. Some tools, like 
-&lt;a href=&#34;https://rsync.samba.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rsync&lt;/a&gt;, will only transfer the parts/chunks of files that are different, and therefore are much more efficient than those that transfer the entire content of files that are different. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;Depending on how smart your synchronisation tool is. Some tools, like &lt;a href=&#34;https://rsync.samba.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rsync&lt;/a&gt;, will only transfer the parts/chunks of files that are different, and therefore are much more efficient than those that transfer the entire content of files that are different.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/section&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -133,8 +125,7 @@
 &lt;p&gt;To achieve this, I make use of virtualisation technologies and automated provisioning systems.&lt;/p&gt;
 &lt;h2 id=&#34;virtualisation&#34;&gt;Virtualisation&lt;/h2&gt;
 &lt;p&gt;Virtualisation is used to provide what is essentially a simulated&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; copy of the real environment. Within this environment, you can freely change things without worrying about messing up an otherwise functioning system. Using features like snapshotting, you can also create &amp;ldquo;known good&amp;rdquo; bookmarks of the system, that is, complete copies of the system state, to which you can return if and when required. In this manner, you can develop iteratively and progressively:&lt;/p&gt;
-&lt;div class=&#34;mermaid&#34;&gt;
-graph TB;
+&lt;div class=&#34;mermaid&#34;&gt;graph TB;
 
 A(Base System)
 B[Create Snapshot]
@@ -166,64 +157,53 @@ G -- yes --&gt; H
 &lt;h1 id=&#34;thats-how-i-role&#34;&gt;That&amp;rsquo;s How I Role&lt;/h1&gt;
 &lt;p&gt;Having provided a broad, non-specific overview , I&amp;rsquo;ll now describe some of the details of my preferred approach.&lt;/p&gt;
 &lt;p&gt;It is also important to note that other solution exist. In particular, the tools I present here are those I&amp;rsquo;ve come to know and love. I find them to be very good at their jobs and very happily recommend them, both individually and in combination, but it can&amp;rsquo;t hurt for you to explore alternatives and find things that suit &lt;em&gt;you&lt;/em&gt;. The best tools are the ones &lt;em&gt;you&lt;/em&gt; can use productively, and the reality is that often means the ones you &lt;em&gt;like&lt;/em&gt; and not necessarily the ones that are technically superior. Find tools you&amp;rsquo;re happy to use, and spend time becoming proficient and productive with them.&lt;/p&gt;
-&lt;h1 id=&#34;virtualisation-hahahugoshortcode-s1-hbhb&#34;&gt;Virtualisation &lt;span class=&#34;subtle&#34;&gt;(again)&lt;/span&gt;&lt;/h1&gt;
-&lt;p&gt;There exist a variety of virtualisation tools that sit at different levels in the virtualisation hierarchy, with the software used to create and run virtual machines often referred to as a hypervisor. I won&amp;rsquo;t attempt to describe or define them here; places such as Wikipedia&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; do a much better job. My long-term hypervisor preference is 
-&lt;a href=&#34;https://www.virtualbox.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VirtualBox by Oracle&lt;/a&gt;. It works well on the host systems that interest me (Windows and Linux on x86 hardware) and can run virtual machines with the guest systems that interest me (again, Windows and Linux on x86 virtualised hardware). Also, it is free and open-source&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;, which appeals to me.&lt;/p&gt;
-&lt;p&gt;My general preference regarding virtual machines is to manage them via 
-&lt;a href=&#34;https://www.vagrantup.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant by HashiCorp&lt;/a&gt;. Primarily, Vagrant is a tool to aid reproducability. It provides a means for defining, building and controlling virtual machines, sitting a level above the hypervisor. Among other things, it abstracts most areas of virtual machine creation and management such that dependence on a specific hypervisor is reduced&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;. A machine is defined via a configuration file that allows you to specify things like a base machine (e.g., a bare Ubuntu 18.04 installation) and resource tweaks (e.g., the amount of RAM, CPUs and such). This makes it very suitable for revision control (that is, the configuration can be placed under revision control), further aiding reproducibility.&lt;/p&gt;
-&lt;p&gt;In some cases, such as with &lt;code&gt;Mammoth&lt;/code&gt;, a suitable base machine does not exist. Specifically, &lt;code&gt;Mammoth&lt;/code&gt; uses a specific partitioning/filesystem layout that is not common enough for someone else to have created a matching base machine. This is where 
-&lt;a href=&#34;https://www.packer.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Packer by HashiCorp&lt;/a&gt; comes in. Packer is a tool for creating virtual machines from scratch. Whereas Vagrant requires an existing base machine (typically a minimally-configured machine with little more than a bare OS having been installed), Packer automates the process one would use to create that base machine (i.e., defining the base machine specs, such as RAM and disks, and automating OS installation and setup).&lt;/p&gt;
+&lt;h1 id=&#34;virtualisation-hahahugoshortcode-s0-hbhb&#34;&gt;Virtualisation &lt;span class=&#34;subtle&#34;&gt;(again)&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;There exist a variety of virtualisation tools that sit at different levels in the virtualisation hierarchy, with the software used to create and run virtual machines often referred to as a hypervisor. I won&amp;rsquo;t attempt to describe or define them here; places such as Wikipedia&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; do a much better job. My long-term hypervisor preference is &lt;a href=&#34;https://www.virtualbox.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VirtualBox by Oracle&lt;/a&gt;. It works well on the host systems that interest me (Windows and Linux on x86 hardware) and can run virtual machines with the guest systems that interest me (again, Windows and Linux on x86 virtualised hardware). Also, it is free and open-source&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;, which appeals to me.&lt;/p&gt;
+&lt;p&gt;My general preference regarding virtual machines is to manage them via &lt;a href=&#34;https://www.vagrantup.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant by HashiCorp&lt;/a&gt;. Primarily, Vagrant is a tool to aid reproducability. It provides a means for defining, building and controlling virtual machines, sitting a level above the hypervisor. Among other things, it abstracts most areas of virtual machine creation and management such that dependence on a specific hypervisor is reduced&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;. A machine is defined via a configuration file that allows you to specify things like a base machine (e.g., a bare Ubuntu 18.04 installation) and resource tweaks (e.g., the amount of RAM, CPUs and such). This makes it very suitable for revision control (that is, the configuration can be placed under revision control), further aiding reproducibility.&lt;/p&gt;
+&lt;p&gt;In some cases, such as with &lt;code&gt;Mammoth&lt;/code&gt;, a suitable base machine does not exist. Specifically, &lt;code&gt;Mammoth&lt;/code&gt; uses a specific partitioning/filesystem layout that is not common enough for someone else to have created a matching base machine. This is where &lt;a href=&#34;https://www.packer.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Packer by HashiCorp&lt;/a&gt; comes in. Packer is a tool for creating virtual machines from scratch. Whereas Vagrant requires an existing base machine (typically a minimally-configured machine with little more than a bare OS having been installed), Packer automates the process one would use to create that base machine (i.e., defining the base machine specs, such as RAM and disks, and automating OS installation and setup).&lt;/p&gt;
 &lt;p&gt;Neither Packer nor Vagrant are tied to any particular virtual machine manager (such as VirtualBox).&lt;/p&gt;
-&lt;p&gt;Step one, therefore, is to use Packer to create a base machine that resembles the real &lt;code&gt;Mammoth&lt;/code&gt; as closely as possible. &lt;code&gt;Mammoth&lt;/code&gt; uses the latest (&lt;code&gt;18.04&lt;/code&gt; at the time of its creation) long-term-support release of &lt;code&gt;Ubuntu&lt;/code&gt; (server variant). To avoid reinventing the wheel, the 
-&lt;a href=&#34;http://chef.github.io/bento/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bento&lt;/a&gt; project was used as a starting point, removing things that weren&amp;rsquo;t needed (e.g., retaining only the &lt;code&gt;ubuntu-18.04-amd64&lt;/code&gt; template) and modifying to suit (e.g., specifying primary drive partitions and filesystems).&lt;/p&gt;
-&lt;p&gt;As a side note, I have had much success with Bento boxes, and highly recommend them for general use. Many of their boxes are available for direct use with Vagrant (i.e., without needing to build with Packer) at 
-&lt;a href=&#34;https://app.vagrantup.com/bento&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant Cloud&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Step one, therefore, is to use Packer to create a base machine that resembles the real &lt;code&gt;Mammoth&lt;/code&gt; as closely as possible. &lt;code&gt;Mammoth&lt;/code&gt; uses the latest (&lt;code&gt;18.04&lt;/code&gt; at the time of its creation) long-term-support release of &lt;code&gt;Ubuntu&lt;/code&gt; (server variant). To avoid reinventing the wheel, the &lt;a href=&#34;http://chef.github.io/bento/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bento&lt;/a&gt; project was used as a starting point, removing things that weren&amp;rsquo;t needed (e.g., retaining only the &lt;code&gt;ubuntu-18.04-amd64&lt;/code&gt; template) and modifying to suit (e.g., specifying primary drive partitions and filesystems).&lt;/p&gt;
+&lt;p&gt;As a side note, I have had much success with Bento boxes, and highly recommend them for general use. Many of their boxes are available for direct use with Vagrant (i.e., without needing to build with Packer) at &lt;a href=&#34;https://app.vagrantup.com/bento&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vagrant Cloud&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;With this base machine in place, Vagrant (and VirtualBox) can then be used to create and run working virtual machines.&lt;/p&gt;
-&lt;h1 id=&#34;automated-provisioning-hahahugoshortcode-s2-hbhb&#34;&gt;Automated Provisioning &lt;span class=&#34;subtle&#34;&gt;(again)&lt;/span&gt;&lt;/h1&gt;
-&lt;p&gt;As with virtualisation, there are a variety of methods and tools to achieve automated provisioning, from freeform scripting through to dedicated tools. As you might guess, I like dedicated tools, and in particular, I like and use 
-&lt;a href=&#34;https://www.ansible.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ansible by Red Hat&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;automated-provisioning-hahahugoshortcode-s1-hbhb&#34;&gt;Automated Provisioning &lt;span class=&#34;subtle&#34;&gt;(again)&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;As with virtualisation, there are a variety of methods and tools to achieve automated provisioning, from freeform scripting through to dedicated tools. As you might guess, I like dedicated tools, and in particular, I like and use &lt;a href=&#34;https://www.ansible.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ansible by Red Hat&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;One of the primary reasons I prefer Ansible is its minimal requirements on both the control node (the machine doing the provisioning) and on managed nodes (the machines being provisioned). In the common case of provisioning a Linux machine, you simply need an SSH server and Python on the managed node&lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;, and Python on the controller&lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;. Ansible does not use or require a server/long-running process (beyond SSH) to run on the managed node (unlike a number of alternative tools), which is good for security (e.g., no additional ports to keep open or processes to keep secure) and resource use (e.g., no RAM or CPU time used by a process that is rarely used).&lt;/p&gt;
 &lt;p&gt;I try to follow Ansible guidelines and best-practices as best as possible, which includes separating host specifications (&amp;ldquo;staging&amp;rdquo; points the the virtual machine, &amp;ldquo;production&amp;rdquo; points to the real machine), using playbooks for middle-management, and using roles to do the heavy lifting.&lt;/p&gt;
-&lt;p&gt;Using roles allows you to avoid reinventing the wheel as much as possible, either by making use of someone else&amp;rsquo;s role definitions (such as those available on 
-&lt;a href=&#34;https://galaxy.ansible.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ansible Galaxy&lt;/a&gt;), or by creating something that you yourself can reuse on other projects (or publish if desired).&lt;/p&gt;
+&lt;p&gt;Using roles allows you to avoid reinventing the wheel as much as possible, either by making use of someone else&amp;rsquo;s role definitions (such as those available on &lt;a href=&#34;https://galaxy.ansible.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ansible Galaxy&lt;/a&gt;), or by creating something that you yourself can reuse on other projects (or publish if desired).&lt;/p&gt;
 &lt;p&gt;I like to break provisioning up into sequential stages, with each stage corresponding to one iteration of the &amp;ldquo;snapshot -&amp;gt; change -&amp;gt; snapshot&amp;rdquo; loop described earlier. In this way, reverting to a snapshot during development means reverting to the result of running a particular sequence of playbooks/stages. I also like to keep stages short and logically coherent, such that they themselves may be reused on other projects.&lt;/p&gt;
 &lt;!-- FOOTNOTES --&gt;
-&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;And indeed, most of the things I describe here I learnt working as a software engineer. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;And indeed, most of the things I describe here I learnt working as a software engineer.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;I&amp;rsquo;m trying to give a description of things that is meaningful to a broad audience, not provide strictly-correct definitions. &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;I&amp;rsquo;m trying to give a description of things that is meaningful to a broad audience, not provide strictly-correct definitions.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;With this sort of development work we often work in terms of different stages or environments: the production environment is the live, &amp;ldquo;real&amp;rdquo; system, the staging environment is as close an analogue as we can get to production where we perform final tests before applying changes to production, and the &amp;ldquo;development&amp;rdquo; environment is that in which most development work takes place before testing in &amp;ldquo;staging&amp;rdquo;. &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;With this sort of development work we often work in terms of different stages or environments: the production environment is the live, &amp;ldquo;real&amp;rdquo; system, the staging environment is as close an analogue as we can get to production where we perform final tests before applying changes to production, and the &amp;ldquo;development&amp;rdquo; environment is that in which most development work takes place before testing in &amp;ldquo;staging&amp;rdquo;.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Assuming one has effectively used the staging environment to develop and test the programs to iron out wrinkles. &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:4&#34;&gt;
+&lt;p&gt;Assuming one has effectively used the staging environment to develop and test the programs to iron out wrinkles.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;See, for example, 
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Virtualization&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Virtualization - Wikipedia&lt;/a&gt; and 
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Hypervisor&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hypervisor - Wikipedia&lt;/a&gt;. &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:5&#34;&gt;
+&lt;p&gt;See, for example, &lt;a href=&#34;https://en.wikipedia.org/wiki/Virtualization&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Virtualization - Wikipedia&lt;/a&gt; and &lt;a href=&#34;https://en.wikipedia.org/wiki/Hypervisor&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hypervisor - Wikipedia&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Except the extension pack, which is not open-source and, broadly speaking, is free for personal use but non-free for commercial user. See 
-&lt;a href=&#34;https://www.virtualbox.org/wiki/Licensing_FAQ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Licensing_FAQ – Oracle VM VirtualBox&lt;/a&gt;. &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:6&#34;&gt;
+&lt;p&gt;Except the extension pack, which is not open-source and, broadly speaking, is free for personal use but non-free for commercial user. See &lt;a href=&#34;https://www.virtualbox.org/wiki/Licensing_FAQ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Licensing_FAQ – Oracle VM VirtualBox&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;There are still some aspects of machine definition that depend on the specific hypervisor being used. &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:7&#34;&gt;
+&lt;p&gt;There are still some aspects of machine definition that depend on the specific hypervisor being used.&amp;#160;&lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:8&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Which covers most if not all modern Linux distributions, including the default for Raspberry Pi machines. &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:8&#34;&gt;
+&lt;p&gt;Which covers most if not all modern Linux distributions, including the default for Raspberry Pi machines.&amp;#160;&lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:9&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Officially, Windows isn&amp;rsquo;t supported as a controller, though 
-&lt;a href=&#34;https://docs.microsoft.com/en-us/windows/wsl/faq&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Windows Subsystem for Linux&lt;/a&gt; overcomes this limitation and is the way I use Ansible. &lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:9&#34;&gt;
+&lt;p&gt;Officially, Windows isn&amp;rsquo;t supported as a controller, though &lt;a href=&#34;https://docs.microsoft.com/en-us/windows/wsl/faq&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Windows Subsystem for Linux&lt;/a&gt; overcomes this limitation and is the way I use Ansible.&amp;#160;&lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/section&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -233,8 +213,7 @@ G -- yes --&gt; H
       <pubDate>Sun, 11 Aug 2019 12:23:49 +1000</pubDate>
       <guid>/post/infosec/information-security-00/</guid>
       <description>&lt;p&gt;Information Security is something that interests me. I would argue that it should be of interest to &lt;em&gt;anyone&lt;/em&gt; and &lt;strong&gt;&lt;em&gt;everyone&lt;/em&gt;&lt;/strong&gt; involved in managing or handling data, especially that of other people&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, which pretty much means almost everyone working in software development or information technology more generally. It should also include anyone making choices about what software or systems they use to manage data, even if that&amp;rsquo;s not part of their job description.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;#takeaway&#34;&gt;TLDR;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#takeaway&#34;&gt;TLDR;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;definitions&#34;&gt;Definitions&lt;/h1&gt;
 &lt;p&gt;As a first point, I should clarify what I mean by information security, as varying definitions exist. I tend to follow the definition provided in ISO/IEC 27000&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -244,28 +223,28 @@ G -- yes --&gt; H
 &lt;p&gt;These properties will be relevant to all users of data, though the requirements can vary widely and this must be understood.&lt;/p&gt;
 &lt;h2 id=&#34;integrity&#34;&gt;Integrity&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;definition 3.36: property of accuracy and completeness&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;definition 3.36: property of accuracy and completeness&lt;sup id=&#34;fnref1:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Broadly speaking I consider data integrity to simply mean that the data is what you expect it to be, which generally means that, for a given piece of data, what you read tomorrow is what you&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; wrote today.&lt;/p&gt;
 &lt;p&gt;Almost all users will have about the same integrity requirements: they want the data they retrieve to be the data they saved. They do not want the data to be changed in unexpected ways, whether as a result of malicious action (e.g., &amp;ldquo;hacking&amp;rdquo;), user error (e.g., accidental deletion), or system failure (e.g., a hardware crash).&lt;/p&gt;
 &lt;p&gt;That said, there may be some instances where this isn&amp;rsquo;t strictly true. An example may be an image storage system whereby uploaded images are (re-)compressed in a lossy manner (e.g., JPEG compression) in order to reduce size (and hence, perhaps, allow the user to store more images).&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; In this case, what the user later retrieves (the compressed image) is not exactly bit-for-bit the same as that which they sent for storage.&lt;/p&gt;
 &lt;h2 id=&#34;availability&#34;&gt;Availability&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;definition 3.7: property of being accessible and usable on demand by an authorized entity&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;definition 3.7: property of being accessible and usable on demand by an authorized entity&lt;sup id=&#34;fnref2:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;In simple terms, I consider this to mean that everyone that should have access to the data is able to get it in a timely manner.&lt;/p&gt;
 &lt;p&gt;Availability requirements will differ: some users will want/need data immediately&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, some don&amp;rsquo;t mind to wait. All want to get it eventually though.&lt;/p&gt;
 &lt;h2 id=&#34;confidentiality&#34;&gt;Confidentiality&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;definition 3.10: property that information is not made available or disclosed to unauthorized individuals, entities, or 
-processes&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;definition 3.10: property that information is not made available or disclosed to unauthorized individuals, entities, or
+processes&lt;sup id=&#34;fnref3:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;I consider this to mean that access to data &amp;ndash; including, in some cases, mere knowledge of the &lt;em&gt;existence&lt;/em&gt; of the data &amp;ndash; can be restricted and controlled.&lt;/p&gt;
 &lt;p&gt;Confidentiality requirements will differ: some don&amp;rsquo;t care who has access&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;, some &lt;em&gt;want&lt;/em&gt; all to access (e.g., someone in marketing may want as many people as possible to view their pitch), some want strict controls (few people want anyone but themselves and perhaps their bank to see their bank records).&lt;/p&gt;
 &lt;h2 id=&#34;authenticity&#34;&gt;Authenticity&lt;/h2&gt;
 &lt;p&gt;One of the &amp;ldquo;other properties&amp;rdquo; mentioned in the opening information security definition that I&amp;rsquo;d like to expand on is authenticity.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;definition 3.6: property that an entity is what it claims to be&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;definition 3.6: property that an entity is what it claims to be&lt;sup id=&#34;fnref4:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;I like to think of this in terms of trust or provenance, that is, being able to trust, verify or confirm the stated source of data.&lt;/p&gt;
 &lt;p&gt;As with all the other properties, requirements will vary. In some instances, as long as access-control mechanisms are in place (i.e., only authorised users have access), it may not matter which &lt;em&gt;specific&lt;/em&gt; authorised user has modified data. In other cases (such as a hospital patient&amp;rsquo;s medication requirements), knowing exactly which user made the changes &amp;ndash; and possibly knowing the entire change history &amp;ndash; is of critical importance.&lt;/p&gt;
@@ -296,57 +275,50 @@ processes&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;f
 &lt;p&gt;Any information that is of value to you is worth keeping secure.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;!-- FOOTNOTES --&gt;
-&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;My general view with this sort of thing is roughly this: if you mess up your own stuff, &lt;em&gt;you&lt;/em&gt; have to deal with the consequences. If you mess up someone else&amp;rsquo;s stuff, &lt;em&gt;they&lt;/em&gt; have to deal with the consequences, which I think is worse (i.e., having to clean up someone else&amp;rsquo;s mess). &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;My general view with this sort of thing is roughly this: if you mess up your own stuff, &lt;em&gt;you&lt;/em&gt; have to deal with the consequences. If you mess up someone else&amp;rsquo;s stuff, &lt;em&gt;they&lt;/em&gt; have to deal with the consequences, which I think is worse (i.e., having to clean up someone else&amp;rsquo;s mess).&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://www.iso.org/standard/73906.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ISO/IEC 27000:2018 - Information technology &amp;ndash; Security techniques &amp;ndash; Information security management systems &amp;ndash; Overview and vocabulary&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.iso.org/standard/73906.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ISO/IEC 27000:2018 - Information technology &amp;ndash; Security techniques &amp;ndash; Information security management systems &amp;ndash; Overview and vocabulary&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref1:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref2:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref3:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref4:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Or some other authorised user/process/agent. &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;Or some other authorised user/process/agent.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Google Photos allows users to make such a choice. See 
-&lt;a href=&#34;https://support.google.com/photos/answer/6220791?co=GENIE.Platform%3DDesktop&amp;amp;hl=en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Choose the upload size of your photos and videos - Google Photos Help&lt;/a&gt; &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:4&#34;&gt;
+&lt;p&gt;Google Photos allows users to make such a choice. See &lt;a href=&#34;https://support.google.com/photos/answer/6220791?co=GENIE.Platform%3DDesktop&amp;amp;hl=en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Choose the upload size of your photos and videos - Google Photos Help&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Even &amp;ldquo;immediately&amp;rdquo; can vary: for high-frequency traders, &amp;ldquo;immediately&amp;rdquo; can mean within microseconds of making a request, while for most people, waiting a few seconds to retrieve an email message is perfectly fine. &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:5&#34;&gt;
+&lt;p&gt;Even &amp;ldquo;immediately&amp;rdquo; can vary: for high-frequency traders, &amp;ldquo;immediately&amp;rdquo; can mean within microseconds of making a request, while for most people, waiting a few seconds to retrieve an email message is perfectly fine.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Though even this can vary, for example, between who can &lt;em&gt;read&lt;/em&gt; the data and who can &lt;em&gt;modify&lt;/em&gt; it. &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:6&#34;&gt;
+&lt;p&gt;Though even this can vary, for example, between who can &lt;em&gt;read&lt;/em&gt; the data and who can &lt;em&gt;modify&lt;/em&gt; it.&amp;#160;&lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Though I&amp;rsquo;d also suggest that too many people undervalue personal information that can be misused with regards to identity theft. &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:7&#34;&gt;
+&lt;p&gt;Though I&amp;rsquo;d also suggest that too many people undervalue personal information that can be misused with regards to identity theft.&amp;#160;&lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:8&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;It&amp;rsquo;s not too uncommon to hear variations on &amp;ldquo;why would anyone want to go after me?&amp;rdquo;. &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:8&#34;&gt;
+&lt;p&gt;It&amp;rsquo;s not too uncommon to hear variations on &amp;ldquo;why would anyone want to go after me?&amp;rdquo;.&amp;#160;&lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:9&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Botnet&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Botnet - Wikipedia&lt;/a&gt; &lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:9&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Botnet&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Botnet - Wikipedia&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:10&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Ransomware&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ransomware - Wikipedia&lt;/a&gt; &lt;a href=&#34;#fnref:10&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:10&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Ransomware&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ransomware - Wikipedia&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:10&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:11&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://en.wiktionary.org/wiki/PEBCAK&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PEBCAK - Wiktionary&lt;/a&gt; &lt;a href=&#34;#fnref:11&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:11&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wiktionary.org/wiki/PEBCAK&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PEBCAK - Wiktionary&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:11&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:12&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;For example, these 
-&lt;a href=&#34;https://blog.envisionitsolutions.com/six-horror-stories-of-data-loss&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Six Horror Stories of Data Loss&lt;/a&gt; &lt;a href=&#34;#fnref:12&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:12&#34;&gt;
+&lt;p&gt;For example, these &lt;a href=&#34;https://blog.envisionitsolutions.com/six-horror-stories-of-data-loss&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Six Horror Stories of Data Loss&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:12&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li id=&#34;fn:13&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Such as Unintentional 
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Denial-of-service_attack#Unintentional_denial-of-service&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Denial-of-service attack - Wikipedia&lt;/a&gt; &lt;a href=&#34;#fnref:13&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:13&#34;&gt;
+&lt;p&gt;Such as Unintentional &lt;a href=&#34;https://en.wikipedia.org/wiki/Denial-of-service_attack#Unintentional_denial-of-service&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Denial-of-service attack - Wikipedia&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:13&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/section&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -359,15 +331,14 @@ processes&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;f
 &lt;p&gt;I&amp;rsquo;m also not sure what I shall be posting here. A mix of things probably. I&amp;rsquo;d like to document some of my hobby projects, share some non-technical things (like parks and playgrounds I&amp;rsquo;ve discovered and enjoyed) and also describe some more serious professional points (like what services I can offer and how I can help &lt;em&gt;you&lt;/em&gt;).&lt;/p&gt;
 &lt;p&gt;Without wishing to get too philosophical, it is said that &lt;span class=&#34;iquote&#34;&gt;A journey of a thousand miles begins with a single step&lt;/span&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. This is that first step.&lt;/p&gt;
 &lt;!-- FOOTNOTES --&gt;
-&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://en.wikipedia.org/wiki/A_journey_of_a_thousand_miles_begins_with_a_single_step&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A journey of a thousand miles begins with a single step - Wikipedia&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/A_journey_of_a_thousand_miles_begins_with_a_single_step&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A journey of a thousand miles begins with a single step - Wikipedia&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/section&gt;
+&lt;/div&gt;
 </description>
     </item>
     
