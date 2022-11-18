@@ -29,6 +29,10 @@
       <pubDate>Sun, 08 Mar 2020 18:00:00 +1100</pubDate>
       <guid>/contact-response/</guid>
       <description>&lt;p&gt;Thanks for your feedback!&lt;/p&gt;
+
+&lt;script&gt;
+    document.write(&#39;&lt;a href=&#34;&#39; + document.referrer + &#39;&#34;&gt;Return to previous page&lt;/a&gt;&#39;);
+&lt;/script&gt;
 </description>
     </item>
     
