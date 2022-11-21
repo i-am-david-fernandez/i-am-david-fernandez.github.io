@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publication_types | i.am.david.fernandez</title>
-    <link>/publication_types/</link>
-      <atom:link href="/publication_types/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://i-am-david-fernandez.github.io/publication_types/</link>
+      <atom:link href="https://i-am-david-fernandez.github.io/publication_types/index.xml" rel="self" type="application/rss+xml" />
     <description>Publication_types</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 12 Dec 2007 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/media/icon_hue91e43d5ef75634b74fed4d30060a2d3_381643_512x512_fill_lanczos_center_3.png</url>
+      <url>https://i-am-david-fernandez.github.io/media/icon_hue91e43d5ef75634b74fed4d30060a2d3_381643_512x512_fill_lanczos_center_3.png</url>
       <title>Publication_types</title>
-      <link>/publication_types/</link>
+      <link>https://i-am-david-fernandez.github.io/publication_types/</link>
     </image>
     
   </channel>

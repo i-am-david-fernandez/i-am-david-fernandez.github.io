@@ -55,7 +55,7 @@ function getTrackingId() {
     var cookieBits = [
       cookieId + "=" + trackingId,
       "expires=" + expiry,
-      // "domain=/",
+      // "domain=https://i-am-david-fernandez.github.io",
       "path=/",
       "SameSite=None",
       "Secure",

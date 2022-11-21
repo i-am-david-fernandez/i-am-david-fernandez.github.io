@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>homelab | i.am.david.fernandez</title>
-    <link>/tag/homelab/</link>
-      <atom:link href="/tag/homelab/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://i-am-david-fernandez.github.io/tag/homelab/</link>
+      <atom:link href="https://i-am-david-fernandez.github.io/tag/homelab/index.xml" rel="self" type="application/rss+xml" />
     <description>homelab</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 18 Aug 2019 08:36:03 +1000</lastBuildDate>
     <image>
-      <url>/media/icon_hue91e43d5ef75634b74fed4d30060a2d3_381643_512x512_fill_lanczos_center_3.png</url>
+      <url>https://i-am-david-fernandez.github.io/media/icon_hue91e43d5ef75634b74fed4d30060a2d3_381643_512x512_fill_lanczos_center_3.png</url>
       <title>homelab</title>
-      <link>/tag/homelab/</link>
+      <link>https://i-am-david-fernandez.github.io/tag/homelab/</link>
     </image>
     
     <item>
       <title>Virtualisation and Provisioning</title>
-      <link>/post/homelab/virtualisation_and_provisioning/</link>
+      <link>https://i-am-david-fernandez.github.io/post/homelab/virtualisation_and_provisioning/</link>
       <pubDate>Sun, 18 Aug 2019 08:36:03 +1000</pubDate>
-      <guid>/post/homelab/virtualisation_and_provisioning/</guid>
+      <guid>https://i-am-david-fernandez.github.io/post/homelab/virtualisation_and_provisioning/</guid>
       <description>&lt;p&gt;This post describes the broad approach I have taken to setting-up and configuring the software system of my current primary home server (&lt;code&gt;Mammoth&lt;/code&gt;). Much of this might seem overkill for a home lab, but part of the point of having a home lab is having a place and projects in and with which I can practice, refine and extend my skills and knowledge in areas that might otherwise be considered the domain of a &amp;ldquo;professional&amp;rdquo;, of some sort&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;p&gt;I won&amp;rsquo;t be presenting any code or code-like material here (that may come in subsequent posts), but will instead focus on my choice of tooling and methods. Also, note that this isn&amp;rsquo;t a tutorial on how to use any of these tools &amp;ndash; your favourite search engine will find those for you &amp;ndash; but rather a higher-level picture of how these different tools can be used together to solve a larger problem.&lt;/p&gt;
 &lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
@@ -109,9 +109,9 @@ G -- yes --&gt; H
     
     <item>
       <title>HomeLab</title>
-      <link>/project/homelab/</link>
+      <link>https://i-am-david-fernandez.github.io/project/homelab/</link>
       <pubDate>Wed, 14 Aug 2019 15:23:15 +1000</pubDate>
-      <guid>/project/homelab/</guid>
+      <guid>https://i-am-david-fernandez.github.io/project/homelab/</guid>
       <description>&lt;p&gt;This project serves to capture material relating to my home (computer) lab setup. I intend to use this to document and share what I have done and learned and what I hope to do in future.&lt;/p&gt;
 </description>
     </item>

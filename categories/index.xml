@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories | i.am.david.fernandez</title>
-    <link>/categories/</link>
-      <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://i-am-david-fernandez.github.io/categories/</link>
+      <atom:link href="https://i-am-david-fernandez.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
     <image>
-      <url>/media/icon_hue91e43d5ef75634b74fed4d30060a2d3_381643_512x512_fill_lanczos_center_3.png</url>
+      <url>https://i-am-david-fernandez.github.io/media/icon_hue91e43d5ef75634b74fed4d30060a2d3_381643_512x512_fill_lanczos_center_3.png</url>
       <title>Categories</title>
-      <link>/categories/</link>
+      <link>https://i-am-david-fernandez.github.io/categories/</link>
     </image>
     
   </channel>
