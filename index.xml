@@ -24,6 +24,39 @@
     </item>
     
     <item>
+      <title>Privacy Policy</title>
+      <link>/privacy/</link>
+      <pubDate>Sun, 08 Mar 2020 18:00:00 +1100</pubDate>
+      <guid>/privacy/</guid>
+      <description>&lt;p&gt;Your privacy, and the security of any information you submit (e.g., via the contact form or via comments), is of the utmost importance, and all efforts are made to ensure your data remains secure.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-collected&#34;&gt;What Is Collected&lt;/h2&gt;
+&lt;p&gt;Information about you may be collected in the following ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Page Tracking&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;The pages you view on this site are recorded along with a randomly-generated identifier that is used to allow overall site use to be determined per visitor. For example, this allows determination that a single visitor visited page X, then page Y, then page Z, as opposed to three separate visitors visiting one of those pages each, or that a single visitor returned to page X one hundred times, as opposed to one hundred different visitors viewing that page. Understanding this can help improve the site by directing efforts where they will have greatest impact.&lt;/li&gt;
+&lt;li&gt;This identifier is stored in a browser/client-side cookie, and a new, independent identifier is generated if one is not present. This means that if, for example, you clear your cookies or use a private window, a new identifier will be used.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Page Comments&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;If you submit a message via the &lt;strong&gt;Comment&lt;/strong&gt; form on on any page, any information you provide is collected.&lt;/li&gt;
+&lt;li&gt;The page-tracking identifier (above) is also implicitly included with submitted comment messages. Note that this means your message can then be associated with the pages you visit on the site. If you don&amp;rsquo;t wish this to occur, you can use a private browser window for submission, ensuring a separate, independent identifier is sent with the message.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Site Contact&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;If you submit a message via the &lt;strong&gt;Contact&lt;/strong&gt; form, any information you provide is collected.&lt;/li&gt;
+&lt;li&gt;The page-tracking identifier (above) is also implicitly included with submitted contact messages. Note that this means your message can then be associated with the pages you visit on the site. If you don&amp;rsquo;t wish this to occur, you can use a private browser window for submission, ensuring a separate, independent identifier is sent with the message.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;where-it-is-stored&#34;&gt;Where It Is Stored&lt;/h2&gt;
+&lt;p&gt;Information that is collected is stored within Google services (specifically Google Forms and Google Sheets) and may be additionally stored in private GitHub repositories that contain the source material for this site.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Thank-you</title>
       <link>/contact-response/</link>
       <pubDate>Sun, 08 Mar 2020 18:00:00 +1100</pubDate>
